@@ -1,8 +1,7 @@
 import UIKit
 
 class RootViewController: UIViewController {
-    let label = UILabel()
-    var button: UIButton!
+    private let label = UILabel()
     private let stackView = UIStackView()
 
     override func viewDidLoad() {
@@ -30,7 +29,7 @@ class RootViewController: UIViewController {
         stackView.addArrangedSubview(label)
         _ = addLabel(text: "Hidden label text", isHidden: true)
 
-        button = addButton(title: "Button title")
+        _ = addButton(title: "Button title")
         _ = addButton(title: "Hidden button title", isHidden: true)
         _ = addButton(title: "Disabled button title", isEnabled: false)
     }
