@@ -59,7 +59,7 @@ class RootViewController: UIViewController {
     }
 
     @objc private func pushViewController() {
-        navigationController?.pushViewController(UIViewController(), animated: true)
+        navigationController?.pushViewController(RootViewController(), animated: true)
     }
 
     @objc private func popViewController() {

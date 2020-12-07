@@ -21,14 +21,12 @@ public struct App {
         return window.rootViewController
     }
 
-    public init(failureBehavior: FailureBehavior = .failTest) {
-        self.failureBehavior = failureBehavior
-    }
-
-    public mutating func load(controller: UIViewController) {
+    public init(controller: UIViewController, failureBehavior: FailureBehavior = .failTest) {
         window.rootViewController = controller
         window.makeKeyAndVisible()
-        self.controller.loadViewIfNeeded()
+        controller.loadViewIfNeeded()
+
+        self.failureBehavior = failureBehavior
     }
 
     public func label(text: String, file: StaticString = #filePath, line: UInt = #line) throws -> UILabel? {

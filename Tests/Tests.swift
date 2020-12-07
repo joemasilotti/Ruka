@@ -9,9 +9,8 @@ class Tests: XCTestCase {
     // MARK: UILabel
 
     func test_findsALabel() throws {
-        var app = App()
         let controller = RootViewController()
-        app.load(controller: controller)
+        let app = App(controller: controller)
 
         let label = try app.label(text: "Label text")
         XCTAssertNotNil(label)
@@ -19,19 +18,15 @@ class Tests: XCTestCase {
     }
 
     func test_doesNotFindAHiddenLabel() throws {
-        var app = App(failureBehavior: .doNothing)
-        let controller = RootViewController()
-        app.load(controller: controller)
-
+        let app = App(controller: RootViewController(), failureBehavior: .doNothing)
         XCTAssertNil(try app.label(text: "Hidden label text"))
     }
 
     // MARK: UIButton
 
     func test_findsAButton() throws {
-        var app = App()
         let controller = RootViewController()
-        app.load(controller: controller)
+        let app = App(controller: controller)
 
         let button = try app.button(title: "Button title")
         XCTAssertNotNil(button)
@@ -39,17 +34,15 @@ class Tests: XCTestCase {
     }
 
     func test_doesNotFindAHiddenButton() throws {
-        var app = App(failureBehavior: .doNothing)
         let controller = RootViewController()
-        app.load(controller: controller)
+        let app = App(controller: controller, failureBehavior: .doNothing)
 
         XCTAssertNil(try app.button(title: "Hidden button title"))
     }
 
     func test_tapsAButton() throws {
-        var app = App()
         let controller = RootViewController()
-        app.load(controller: controller)
+        let app = App(controller: controller)
 
         let button = try app.button(title: "Button title")
         button?.tap()
@@ -58,9 +51,8 @@ class Tests: XCTestCase {
     }
 
     func test_doesNotTapADisabledButton() throws {
-        var app = App(failureBehavior: .doNothing)
         let controller = RootViewController()
-        app.load(controller: controller)
+        let app = App(controller: controller, failureBehavior: .doNothing)
 
         let button = try app.button(title: "Disabled button title")
         button?.tap()
@@ -71,10 +63,8 @@ class Tests: XCTestCase {
     // MARK: UINavigationController
 
     func test_pushesAViewController() throws {
-        var app = App()
-        let controller = RootViewController()
-        let navigationController = UINavigationController(rootViewController: controller)
-        app.load(controller: controller)
+        let navigationController = UINavigationController(rootViewController: RootViewController())
+        let app = App(controller: navigationController)
 
         try app.button(title: "Push view controller")?.tap()
 
@@ -82,10 +72,8 @@ class Tests: XCTestCase {
     }
 
     func test_popsAViewController() throws {
-        var app = App()
-        let controller = RootViewController()
-        let navigationController = UINavigationController(rootViewController: controller)
-        app.load(controller: controller)
+        let navigationController = UINavigationController(rootViewController: RootViewController())
+        let app = App(controller: navigationController)
 
         try app.button(title: "Push view controller")?.tap()
         XCTAssertEqual(navigationController.viewControllers.count, 2)
@@ -97,18 +85,12 @@ class Tests: XCTestCase {
     // MARK: Failure behavior
 
     func test_aMissingElement_raisesAnError() throws {
-        var app = App(failureBehavior: .raiseException)
-        let controller = RootViewController()
-        app.load(controller: controller)
-
+        let app = App(controller: RootViewController(), failureBehavior: .raiseException)
         XCTAssertThrowsError(try app.label(text: "Missing element"))
     }
 
     func test_aMissingElement_isNil() throws {
-        var app = App(failureBehavior: .doNothing)
-        let controller = RootViewController()
-        app.load(controller: controller)
-
+        let app = App(controller: RootViewController(), failureBehavior: .doNothing)
         XCTAssertNil(try app.label(text: "Missing element"))
     }
 }
