@@ -68,6 +68,32 @@ class Tests: XCTestCase {
         XCTAssertNil(try app.label(text: "Changed label text"))
     }
 
+    // MARK: UINavigationController
+
+    func test_pushesAViewController() throws {
+        var app = App()
+        let controller = RootViewController()
+        let navigationController = UINavigationController(rootViewController: controller)
+        app.load(controller: controller)
+
+        try app.button(title: "Push view controller")?.tap()
+
+        XCTAssertEqual(navigationController.viewControllers.count, 2)
+    }
+
+    func test_popsAViewController() throws {
+        var app = App()
+        let controller = RootViewController()
+        let navigationController = UINavigationController(rootViewController: controller)
+        app.load(controller: controller)
+
+        try app.button(title: "Push view controller")?.tap()
+        XCTAssertEqual(navigationController.viewControllers.count, 2)
+
+        try app.button(title: "Pop view controller")?.tap()
+        XCTAssertEqual(navigationController.viewControllers.count, 1)
+    }
+
     // MARK: Failure behavior
 
     func test_aMissingElement_raisesAnError() throws {

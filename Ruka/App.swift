@@ -12,16 +12,23 @@ public struct App {
     }
 
     private let failureBehavior: FailureBehavior
+    private let window = UIWindow()
 
-    private var controller: UIViewController!
+    private var controller: UIViewController! {
+        if let navigationController = window.rootViewController as? UINavigationController {
+            return navigationController.topViewController
+        }
+        return window.rootViewController
+    }
 
     public init(failureBehavior: FailureBehavior = .failTest) {
         self.failureBehavior = failureBehavior
     }
 
     public mutating func load(controller: UIViewController) {
-        controller.loadViewIfNeeded()
-        self.controller = controller
+        window.rootViewController = controller
+        window.makeKeyAndVisible()
+        self.controller.loadViewIfNeeded()
     }
 
     public func label(text: String, file: StaticString = #filePath, line: UInt = #line) throws -> UILabel? {

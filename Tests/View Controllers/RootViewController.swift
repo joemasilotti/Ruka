@@ -32,6 +32,8 @@ class RootViewController: UIViewController {
         _ = addButton(title: "Button title")
         _ = addButton(title: "Hidden button title", isHidden: true)
         _ = addButton(title: "Disabled button title", isEnabled: false)
+        _ = addButton(title: "Push view controller", action: #selector(pushViewController))
+        _ = addButton(title: "Pop view controller", action: #selector(popViewController))
     }
 
     private func addLabel(text: String, isHidden: Bool = false) -> UILabel {
@@ -42,17 +44,25 @@ class RootViewController: UIViewController {
         return label
     }
 
-    private func addButton(title: String, isHidden: Bool = false, isEnabled: Bool = true) -> UIButton {
+    private func addButton(title: String, isHidden: Bool = false, isEnabled: Bool = true, action: Selector = #selector(changeLabelText)) -> UIButton {
         let button = UIButton(type: .system)
         button.isHidden = isHidden
         button.isEnabled = isEnabled
         button.setTitle(title, for: .normal)
-        button.addTarget(self, action: #selector(changeLabelText), for: .touchUpInside)
+        button.addTarget(self, action: action, for: .touchUpInside)
         stackView.addArrangedSubview(button)
         return button
     }
 
     @objc private func changeLabelText() {
         label.text = "Changed label text"
+    }
+
+    @objc private func pushViewController() {
+        navigationController?.pushViewController(UIViewController(), animated: true)
+    }
+
+    @objc private func popViewController() {
+        navigationController?.popViewController(animated: true)
     }
 }
