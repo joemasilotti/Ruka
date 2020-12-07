@@ -1,4 +1,4 @@
-import Ruka
+@testable import Ruka
 import XCTest
 
 class Tests: XCTestCase {
@@ -80,6 +80,30 @@ class Tests: XCTestCase {
 
         try app.button(title: "Pop view controller")?.tap()
         XCTAssertEqual(navigationController.viewControllers.count, 1)
+    }
+
+    // MARK: Modal view controllers
+
+    func test_presentsAViewController() throws {
+        let controller = RootViewController()
+        let app = App(controller: controller)
+
+        try app.button(title: "Present view controller")?.tap()
+
+        XCTAssertNotNil(controller.presentedViewController)
+    }
+
+    func test_dismissesAViewController() throws {
+        let controller = RootViewController()
+        let app = App(controller: controller)
+
+        try app.button(title: "Present view controller")?.tap()
+        XCTAssertNotNil(controller.presentedViewController)
+        XCTAssertNotNil(app.controller.presentingViewController)
+
+        try app.button(title: "Dismiss view controller")?.tap()
+        XCTAssertNil(controller.presentedViewController)
+        XCTAssertNil(app.controller.presentingViewController)
     }
 
     // MARK: Failure behavior

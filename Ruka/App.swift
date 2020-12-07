@@ -14,9 +14,11 @@ public struct App {
     private let failureBehavior: FailureBehavior
     private let window = UIWindow()
 
-    private var controller: UIViewController! {
+    internal var controller: UIViewController! {
         if let navigationController = window.rootViewController as? UINavigationController {
             return navigationController.topViewController
+        } else if let presentedController = window.rootViewController?.presentedViewController {
+            return presentedController
         }
         return window.rootViewController
     }

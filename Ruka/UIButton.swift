@@ -5,6 +5,6 @@ public extension UIButton {
         guard isEnabled else { return }
 
         sendActions(for: .touchUpInside)
-        RunLoop.current.run(until: Date())
+        RunLoop.current.run(until: Date().addingTimeInterval(0.01))
     }
 }

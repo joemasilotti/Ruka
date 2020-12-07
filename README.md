@@ -44,6 +44,10 @@ See the unit tests for more examples.
 
 `button.tap()` - triggers the target-action for the button if not disabled
 
+## View controllers
+
+Pushing/popping and presenting/dismissing view controllers is supported.
+
 ## To-do
 
 1. Presenting and dismissing view controllers

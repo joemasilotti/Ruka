@@ -34,6 +34,8 @@ class RootViewController: UIViewController {
         _ = addButton(title: "Disabled button title", isEnabled: false)
         _ = addButton(title: "Push view controller", action: #selector(pushViewController))
         _ = addButton(title: "Pop view controller", action: #selector(popViewController))
+        _ = addButton(title: "Present view controller", action: #selector(presentViewController))
+        _ = addButton(title: "Dismiss view controller", action: #selector(dismissViewController))
     }
 
     private func addLabel(text: String, isHidden: Bool = false) -> UILabel {
@@ -64,5 +66,13 @@ class RootViewController: UIViewController {
 
     @objc private func popViewController() {
         navigationController?.popViewController(animated: true)
+    }
+
+    @objc private func presentViewController() {
+        present(RootViewController(), animated: true)
+    }
+
+    @objc private func dismissViewController() {
+        dismiss(animated: true)
     }
 }
