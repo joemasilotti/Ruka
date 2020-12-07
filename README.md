@@ -50,7 +50,6 @@ Pushing/popping and presenting/dismissing view controllers is supported.
 
 ## To-do
 
-1. Presenting and dismissing view controllers
 1. Alerts
 1. Table views
 1. Collection views
