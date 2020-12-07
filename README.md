@@ -14,12 +14,15 @@ Have you tried anything like this? Is this obviously a maintenance nightmare? I 
 
 ## Setup
 
+In your `XCTestCase` tests...
+
 ```swift
 continueAfterFailure = false
 
 let app = App()
 let controller = /* your controller */
 app.load(controller: controller)
+
 // ...
 ```
 
@@ -40,3 +43,17 @@ See the unit tests for more examples.
 ### `tap()`
 
 `button.tap()` - triggers the target-action for the button if not disabled
+
+## To-do
+
+1. Pushing, popping, presenting, and dismissing view controllers
+1. Alerts
+1. Table views
+1. Collection views
+1. Text fields
+1. (probably a lot more!)
+
+## Out of scope (for now)
+
+1. System alerts - this probably isn't be possible
+1. SwiftUI - [ViewInspector](https://github.com/nalexn/ViewInspector) is probably a better choice
