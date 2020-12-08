@@ -180,6 +180,42 @@ class Tests: XCTestCase {
         XCTAssertNotNil(try app.label(text: "Disabled"))
     }
 
+    // MARK: UIStepper
+
+    func test_findsAStepper() throws {
+        let app = App(controller: FormViewController())
+        XCTAssertNotNil(try app.stepper(accessibilityLabel: "A stepper"))
+    }
+
+    func test_doesNotFindAHiddenStepper() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.stepper(accessibilityLabel: "A hidden stepper"))
+    }
+
+    func test_incrementsAStepper() throws {
+        let app = App(controller: FormViewController())
+        try app.incrementStepper(accessibilityLabel: "A stepper")
+        XCTAssertNotNil(try app.label(text: "3.0"))
+    }
+
+    func test_decrementsAStepper() throws {
+        let app = App(controller: FormViewController())
+        try app.decrementStepper(accessibilityLabel: "A stepper")
+        XCTAssertNotNil(try app.label(text: "1.0"))
+    }
+
+    func test_doesNotIncrementADisabledStepper() throws {
+        let app = App(controller: FormViewController())
+        try app.incrementStepper(accessibilityLabel: "A disabled stepper")
+        XCTAssertNotNil(try app.label(text: "2.0"))
+    }
+
+    func test_doesNotDecrementADisabledStepper() throws {
+        let app = App(controller: FormViewController())
+        try app.decrementStepper(accessibilityLabel: "A disabled stepper")
+        XCTAssertNotNil(try app.label(text: "2.0"))
+    }
+
     // MARK: Failure behavior
 
     func test_aMissingElement_raisesAnError() throws {

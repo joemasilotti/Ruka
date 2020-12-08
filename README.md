@@ -42,6 +42,14 @@ See the unit tests for more examples.
 
 `switch(accessibilityLabel:)` - find a non-hidden switch with the given `accessibilityLabel`, recursively, in the view
 
+### `UIStepper`
+
+`stepper(accessibilityLabel:)` - finds a non-hidden stepper with the given `accessibilityLabel`, recursively, in the view
+
+### `UITableView`
+
+`app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
+
 ## Interactions
 
 ### `tap()`
@@ -52,6 +60,15 @@ See the unit tests for more examples.
 
 `switch.toggle()` - triggers the value changed action on the switch if not disabled
 
+### `tapCell(containingText:)`
+
+`app.tapCell(containingText: "Cell text")` - taps the found cell (above) via its index path and delegate
+
+### `incrementStepper()` and `decrementStepper()`
+
+* `app.incrementStepper(accessibilityLabel:)` - increments the stepper by the step value and triggers the value changed action, if not disabled
+* `app.decrementStepper(accessibilityLabel:)` - decrements the stepper by the step value and triggers the value changed action, if not disabled
+
 ## View controllers
 
 Pushing/popping and presenting/dismissing view controllers is supported.
@@ -60,14 +77,8 @@ Pushing/popping and presenting/dismissing view controllers is supported.
 
 `app.alertViewController.tapButton(title: "Dismiss")` - triggers the attached action and dismisses the alert
 
-## `UITableView`
-
-* `app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
-* `app.tapCell(containingText: "Cell text")` - taps the found cell (above) via its index path and delegate
-
 ## To-do
 
-1. Steppers
 1. Sliders
 1. Text fields
 1. Gestures - swiping and scrolling

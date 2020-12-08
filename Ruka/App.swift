@@ -91,6 +91,28 @@ public struct App {
         return `switch`
     }
 
+    public func stepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIStepper? {
+        let steppers = controller.view.findViews(subclassOf: UIStepper.self)
+        let stepper = steppers.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+
+        if stepper == nil, failureBehavior != .doNothing {
+            try failOrRaise("Could not find stepper with accessibility label '\(label)'.", file: file, line: line)
+        }
+        return stepper
+    }
+
+    public func incrementStepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws {
+        guard let stepper = try self.stepper(accessibilityLabel: label), stepper.isEnabled else { return }
+        stepper.value += stepper.stepValue
+        stepper.sendActions(for: .valueChanged)
+    }
+
+    public func decrementStepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws {
+        guard let stepper = try self.stepper(accessibilityLabel: label), stepper.isEnabled else { return }
+        stepper.value -= stepper.stepValue
+        stepper.sendActions(for: .valueChanged)
+    }
+
     private func failOrRaise(_ message: String, file: StaticString, line: UInt) throws {
         switch failureBehavior {
         case .failTest:

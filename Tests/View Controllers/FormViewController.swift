@@ -2,7 +2,8 @@ import UIKit
 
 class FormViewController: UIViewController {
     private let stackView = UIStackView()
-    private let label = UILabel()
+    private let switchlabel = UILabel()
+    private let stepperLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,28 +26,45 @@ class FormViewController: UIViewController {
     }
 
     private func installSubviews() {
+        addSwitch(accessibilityLabel: "A switch")
+        addSwitch(accessibilityLabel: "A hidden switch", isHidden: true)
+        addSwitch(accessibilityLabel: "A disabled switch", isEnabled: false)
+
+        switchlabel.text = "Disabled"
+        stackView.addArrangedSubview(switchlabel)
+
+        addStepper(accessibilityLabel: "A stepper")
+        addStepper(accessibilityLabel: "A hidden stepper", isHidden: true)
+        addStepper(accessibilityLabel: "A disabled stepper", isEnabled: false)
+
+        stepperLabel.text = "2.0"
+        stackView.addArrangedSubview(stepperLabel)
+    }
+
+    private func addSwitch(accessibilityLabel: String, isHidden: Bool = false, isEnabled: Bool = true) {
         let `switch` = UISwitch()
-        `switch`.accessibilityLabel = "A switch"
+        `switch`.isHidden = isHidden
+        `switch`.isEnabled = isEnabled
+        `switch`.accessibilityLabel = accessibilityLabel
         `switch`.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
         stackView.addArrangedSubview(`switch`)
+    }
 
-        let hiddenSwitch = UISwitch()
-        hiddenSwitch.isHidden = true
-        hiddenSwitch.accessibilityLabel = "A hidden switch"
-        hiddenSwitch.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
-        stackView.addArrangedSubview(hiddenSwitch)
-
-        let disabledSwitch = UISwitch()
-        disabledSwitch.isEnabled = false
-        disabledSwitch.accessibilityLabel = "A disabled switch"
-        disabledSwitch.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
-        stackView.addArrangedSubview(disabledSwitch)
-
-        label.text = "Disabled"
-        stackView.addArrangedSubview(label)
+    private func addStepper(accessibilityLabel: String, isHidden: Bool = false, isEnabled: Bool = true) {
+        let stepper = UIStepper()
+        stepper.value = 2
+        stepper.isHidden = isHidden
+        stepper.isEnabled = isEnabled
+        stepper.accessibilityLabel = accessibilityLabel
+        stepper.addTarget(self, action: #selector(changeStepper), for: .valueChanged)
+        stackView.addArrangedSubview(stepper)
     }
 
     @objc private func toggleSwitch(switch: UISwitch) {
-        label.text = `switch`.isOn ? "Disabled" : "Enabled"
+        switchlabel.text = `switch`.isOn ? "Disabled" : "Enabled"
+    }
+
+    @objc private func changeStepper(stepper: UIStepper) {
+        stepperLabel.text = "\(stepper.value)"
     }
 }
