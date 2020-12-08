@@ -106,6 +106,29 @@ class Tests: XCTestCase {
         XCTAssertNil(app.controller.presentingViewController)
     }
 
+    // MARK: UIAlertController
+
+    func test_findsAnAlert() throws {
+        let controller = RootViewController()
+        let app = App(controller: controller)
+
+        try app.button(title: "Show alert")?.tap()
+        XCTAssertNotNil(try app.label(text: "Alert title"))
+        XCTAssertNotNil(try app.label(text: "Alert message."))
+    }
+
+    func test_dismissesAnAlert() throws {
+        let controller = RootViewController()
+        let app = App(controller: controller, failureBehavior: .doNothing)
+
+        try app.button(title: "Show alert")?.tap()
+        XCTAssertNil(try app.button(title: "Show alert"))
+
+        app.alertViewController?.tapButton(title: "Dismiss")
+        XCTAssertNotNil(try app.button(title: "Show alert"))
+        XCTAssertNotNil(try app.label(text: "Changed label text"))
+    }
+
     // MARK: Failure behavior
 
     func test_aMissingElement_raisesAnError() throws {

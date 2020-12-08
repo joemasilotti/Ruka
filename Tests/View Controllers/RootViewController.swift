@@ -32,10 +32,13 @@ class RootViewController: UIViewController {
         _ = addButton(title: "Button title")
         _ = addButton(title: "Hidden button title", isHidden: true)
         _ = addButton(title: "Disabled button title", isEnabled: false)
+
         _ = addButton(title: "Push view controller", action: #selector(pushViewController))
         _ = addButton(title: "Pop view controller", action: #selector(popViewController))
         _ = addButton(title: "Present view controller", action: #selector(presentViewController))
         _ = addButton(title: "Dismiss view controller", action: #selector(dismissViewController))
+
+        _ = addButton(title: "Show alert", action: #selector(showAlert))
     }
 
     private func addLabel(text: String, isHidden: Bool = false) -> UILabel {
@@ -74,5 +77,13 @@ class RootViewController: UIViewController {
 
     @objc private func dismissViewController() {
         dismiss(animated: true)
+    }
+
+    @objc private func showAlert() {
+        let alert = UIAlertController(title: "Alert title", message: "Alert message.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { [weak self] _ in
+            self?.label.text = "Changed label text"
+        }))
+        present(alert, animated: true)
     }
 }

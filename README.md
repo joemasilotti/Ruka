@@ -48,9 +48,12 @@ See the unit tests for more examples.
 
 Pushing/popping and presenting/dismissing view controllers is supported.
 
+## `UIAlertController`
+
+`app.alertViewController.tapButton(title: "Dismiss")` - triggers the attached action and dismisses the alert
+
 ## To-do
 
-1. Alerts
 1. Table views
 1. Collection views
 1. Text fields

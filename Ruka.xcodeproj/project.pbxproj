@@ -14,6 +14,7 @@
 		84146A79257DC4CF00A9768A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84146A78257DC4CF00A9768A /* Assets.xcassets */; };
 		84146A7C257DC4CF00A9768A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84146A7A257DC4CF00A9768A /* LaunchScreen.storyboard */; };
 		84146A8A257DC60A00A9768A /* UIView+SubviewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146A89257DC60A00A9768A /* UIView+SubviewFinder.swift */; };
+		84146A92257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146A91257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift */; };
 		8498A7F2257D9E73005AB527 /* Ruka.h in Headers */ = {isa = PBXBuildFile; fileRef = 8498A7F0257D9E73005AB527 /* Ruka.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8498A800257D9EB5005AB527 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498A7FF257D9EB5005AB527 /* Tests.swift */; };
 		8498A802257D9EB5005AB527 /* Ruka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8498A7ED257D9E73005AB527 /* Ruka.framework */; platformFilter = ios; };
@@ -49,6 +50,7 @@
 		84146A7B257DC4CF00A9768A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84146A7D257DC4CF00A9768A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84146A89257DC60A00A9768A /* UIView+SubviewFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SubviewFinder.swift"; sourceTree = "<group>"; };
+		84146A91257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ActionInvoker.swift"; sourceTree = "<group>"; };
 		8498A7ED257D9E73005AB527 /* Ruka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ruka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8498A7F0257D9E73005AB527 /* Ruka.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ruka.h; sourceTree = "<group>"; };
 		8498A7F1257D9E73005AB527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				8498A80A257D9EE6005AB527 /* App.swift */,
 				8498A7F1257D9E73005AB527 /* Info.plist */,
 				8498A7F0257D9E73005AB527 /* Ruka.h */,
+				84146A91257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift */,
 				84A838BF257DB77300815F62 /* UIButton.swift */,
 				84146A89257DC60A00A9768A /* UIView+SubviewFinder.swift */,
 			);
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84146A8A257DC60A00A9768A /* UIView+SubviewFinder.swift in Sources */,
+				84146A92257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift in Sources */,
 				8498A80B257D9EE6005AB527 /* App.swift in Sources */,
 				84A838C0257DB77300815F62 /* UIButton.swift in Sources */,
 			);

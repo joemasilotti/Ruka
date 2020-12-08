@@ -11,8 +11,9 @@ public struct App {
         case unfoundElement
     }
 
-    private let failureBehavior: FailureBehavior
-    private let window = UIWindow()
+    public var alertViewController: UIAlertController? {
+        controller as? UIAlertController
+    }
 
     internal var controller: UIViewController! {
         if let navigationController = window.rootViewController as? UINavigationController {
@@ -22,6 +23,9 @@ public struct App {
         }
         return window.rootViewController
     }
+
+    private let failureBehavior: FailureBehavior
+    private let window = UIWindow()
 
     public init(controller: UIViewController, failureBehavior: FailureBehavior = .failTest) {
         window.rootViewController = controller
