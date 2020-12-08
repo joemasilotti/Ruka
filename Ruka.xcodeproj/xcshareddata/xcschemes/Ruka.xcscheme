@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8498A7EC257D9E73005AB527"
+               BlueprintIdentifier = "Ruka::Ruka"
                BuildableName = "Ruka.framework"
                BlueprintName = "Ruka"
+               ReferencedContainer = "container:Ruka.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "Ruka::RukaTests"
+               BuildableName = "RukaTests.xctest"
+               BlueprintName = "RukaTests"
                ReferencedContainer = "container:Ruka.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8498A7FC257D9EB5005AB527"
-               BuildableName = "Tests.xctest"
-               BlueprintName = "Tests"
+               BlueprintIdentifier = "Ruka::RukaTests"
+               BuildableName = "RukaTests.xctest"
+               BlueprintName = "RukaTests"
                ReferencedContainer = "container:Ruka.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -60,7 +74,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8498A7EC257D9E73005AB527"
+            BlueprintIdentifier = "Ruka::Ruka"
             BuildableName = "Ruka.framework"
             BlueprintName = "Ruka"
             ReferencedContainer = "container:Ruka.xcodeproj">

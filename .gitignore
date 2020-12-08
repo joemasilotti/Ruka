@@ -4,6 +4,7 @@
 # Build temp files
 DerivedData/
 Build/
+.build/
 
 # Xcode config settings
 *.pbxuser
