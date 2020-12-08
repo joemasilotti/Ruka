@@ -136,7 +136,7 @@ class Tests: XCTestCase {
         XCTAssertEqual(app.tableView?.visibleCells.count ?? 0, 3)
     }
 
-    func test_findsSpecificCells() throws {
+    func test_findsASpecificCell() throws {
         let app = App(controller: TableViewController(), failureBehavior: .doNothing)
         XCTAssertNotNil(try app.cell(containingText: "Three"))
 
@@ -144,7 +144,7 @@ class Tests: XCTestCase {
         XCTAssertNil(try app.cell(containingText: "Label text"))
     }
 
-    func test_tapsCells() throws {
+    func test_tapsACell() throws {
         let app = App(controller: TableViewController())
         try app.tapCell(containingText: "Three")
         XCTAssertNotNil(try app.label(text: "Changed label text"))

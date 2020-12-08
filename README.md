@@ -67,6 +67,8 @@ Pushing/popping and presenting/dismissing view controllers is supported.
 
 ## To-do
 
+1. Steppers
+1. Sliders
 1. Text fields
 1. Gestures - swiping and scrolling
 1. Collection views
