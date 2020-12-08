@@ -52,12 +52,18 @@ Pushing/popping and presenting/dismissing view controllers is supported.
 
 `app.alertViewController.tapButton(title: "Dismiss")` - triggers the attached action and dismisses the alert
 
+## `UITableView`
+
+* `app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` containing a label matching the text
+* `app.tapCell(containingText: "Cell text")` - taps the found cell (above) via its index path and delegate
+
 ## To-do
 
-1. Table views
-1. Collection views
 1. Text fields
-1. (probably a lot more!)
+1. Gestures - swiping and scrolling
+1. Collection views
+1. Map views
+1. ...
 
 ## Out of scope (for now)
 

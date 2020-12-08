@@ -15,6 +15,10 @@ public struct App {
         controller as? UIAlertController
     }
 
+    public var tableView: UITableView? {
+        controller.view.findViews(subclassOf: UITableView.self).first
+    }
+
     internal var controller: UIViewController! {
         if let navigationController = window.rootViewController as? UINavigationController {
             return navigationController.topViewController
@@ -31,6 +35,7 @@ public struct App {
         window.rootViewController = controller
         window.makeKeyAndVisible()
         controller.loadViewIfNeeded()
+        controller.view.layoutIfNeeded()
 
         self.failureBehavior = failureBehavior
     }
@@ -53,6 +58,27 @@ public struct App {
             try failOrRaise("Could not find button with text '\(title)'.", file: file, line: line)
         }
         return button
+    }
+
+    public func cell(containingText text: String, file: StaticString = #filePath, line: UInt = #line) throws -> UITableViewCell? {
+        let tableViewCell = tableView?.visibleCells.first(where: { cell -> Bool in
+            cell.findViews(subclassOf: UILabel.self).contains { $0.text == text }
+        })
+
+        if tableViewCell == nil, failureBehavior != .doNothing {
+            try failOrRaise("Could not find cell containing text '\(text)'.", file: file, line: line)
+        }
+        return tableViewCell
+    }
+
+    public func tapCell(containingText text: String, file: StaticString = #filePath, line: UInt = #line) throws {
+        guard
+            let tableView = tableView,
+            let tableViewCell = try cell(containingText: text),
+            let indexPath = tableView.indexPath(for: tableViewCell)
+        else { return }
+
+        tableView.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
 
     private func failOrRaise(_ message: String, file: StaticString, line: UInt) throws {

@@ -129,6 +129,27 @@ class Tests: XCTestCase {
         XCTAssertNotNil(try app.label(text: "Changed label text"))
     }
 
+    // MARK: UITableView
+
+    func test_findsVisibleCells() throws {
+        let app = App(controller: TableViewController())
+        XCTAssertEqual(app.tableView?.visibleCells.count ?? 0, 3)
+    }
+
+    func test_findsSpecificCells() throws {
+        let app = App(controller: TableViewController(), failureBehavior: .doNothing)
+        XCTAssertNotNil(try app.cell(containingText: "Three"))
+
+        XCTAssertNotNil(try app.label(text: "Label text"))
+        XCTAssertNil(try app.cell(containingText: "Label text"))
+    }
+
+    func test_tapsCells() throws {
+        let app = App(controller: TableViewController())
+        try app.tapCell(containingText: "Three")
+        XCTAssertNotNil(try app.label(text: "Changed label text"))
+    }
+
     // MARK: Failure behavior
 
     func test_aMissingElement_raisesAnError() throws {
