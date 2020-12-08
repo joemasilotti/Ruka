@@ -38,11 +38,19 @@ See the unit tests for more examples.
 
 `button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
 
+### `UISwitch`
+
+`switch(accessibilityLabel:)` - find a non-hidden switch with the given `accessibilityLabel`, recursively, in the view
+
 ## Interactions
 
 ### `tap()`
 
 `button.tap()` - triggers the target-action for the button if not disabled
+
+### `toggle()`
+
+`switch.toggle()` - triggers the value changed action on the switch if not disabled
 
 ## View controllers
 

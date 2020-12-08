@@ -16,6 +16,8 @@
 		84146A8A257DC60A00A9768A /* UIView+SubviewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146A89257DC60A00A9768A /* UIView+SubviewFinder.swift */; };
 		84146A92257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146A91257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift */; };
 		84146A9A257EFF8800A9768A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146A99257EFF8800A9768A /* TableViewController.swift */; };
+		84146AA2257F0D1B00A9768A /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146AA1257F0D1B00A9768A /* FormViewController.swift */; };
+		84146AAA257F0F5700A9768A /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146AA9257F0F5700A9768A /* UISwitch.swift */; };
 		8498A7F2257D9E73005AB527 /* Ruka.h in Headers */ = {isa = PBXBuildFile; fileRef = 8498A7F0257D9E73005AB527 /* Ruka.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8498A800257D9EB5005AB527 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498A7FF257D9EB5005AB527 /* Tests.swift */; };
 		8498A802257D9EB5005AB527 /* Ruka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8498A7ED257D9E73005AB527 /* Ruka.framework */; platformFilter = ios; };
@@ -53,6 +55,8 @@
 		84146A89257DC60A00A9768A /* UIView+SubviewFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SubviewFinder.swift"; sourceTree = "<group>"; };
 		84146A91257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ActionInvoker.swift"; sourceTree = "<group>"; };
 		84146A99257EFF8800A9768A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		84146AA1257F0D1B00A9768A /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		84146AA9257F0F5700A9768A /* UISwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwitch.swift; sourceTree = "<group>"; };
 		8498A7ED257D9E73005AB527 /* Ruka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ruka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8498A7F0257D9E73005AB527 /* Ruka.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ruka.h; sourceTree = "<group>"; };
 		8498A7F1257D9E73005AB527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				8498A7F0257D9E73005AB527 /* Ruka.h */,
 				84146A91257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift */,
 				84A838BF257DB77300815F62 /* UIButton.swift */,
+				84146AA9257F0F5700A9768A /* UISwitch.swift */,
 				84146A89257DC60A00A9768A /* UIView+SubviewFinder.swift */,
 			);
 			path = Ruka;
@@ -150,6 +155,7 @@
 		8498A82D257DA6BF005AB527 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84146AA1257F0D1B00A9768A /* FormViewController.swift */,
 				8498A82E257DA6E4005AB527 /* RootViewController.swift */,
 				84146A99257EFF8800A9768A /* TableViewController.swift */,
 			);
@@ -309,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84146A8A257DC60A00A9768A /* UIView+SubviewFinder.swift in Sources */,
+				84146AAA257F0F5700A9768A /* UISwitch.swift in Sources */,
 				84146A92257EFE5B00A9768A /* UIAlertController+ActionInvoker.swift in Sources */,
 				8498A80B257D9EE6005AB527 /* App.swift in Sources */,
 				84A838C0257DB77300815F62 /* UIButton.swift in Sources */,
@@ -321,6 +328,7 @@
 			files = (
 				8498A82F257DA6E4005AB527 /* RootViewController.swift in Sources */,
 				84146A9A257EFF8800A9768A /* TableViewController.swift in Sources */,
+				84146AA2257F0D1B00A9768A /* FormViewController.swift in Sources */,
 				8498A800257D9EB5005AB527 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

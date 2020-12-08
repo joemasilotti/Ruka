@@ -81,6 +81,16 @@ public struct App {
         tableView.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
 
+    public func `switch`(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISwitch? {
+        let switches = controller.view.findViews(subclassOf: UISwitch.self)
+        let `switch` = switches.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+
+        if `switch` == nil, failureBehavior != .doNothing {
+            try failOrRaise("Could not find switch with accessibility label '\(label)'.", file: file, line: line)
+        }
+        return `switch`
+    }
+
     private func failOrRaise(_ message: String, file: StaticString, line: UInt) throws {
         switch failureBehavior {
         case .failTest:

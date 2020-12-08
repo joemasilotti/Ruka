@@ -150,6 +150,36 @@ class Tests: XCTestCase {
         XCTAssertNotNil(try app.label(text: "Changed label text"))
     }
 
+    // MARK: UISwitch
+
+    func test_findsASwitch() throws {
+        let app = App(controller: FormViewController())
+        XCTAssertNotNil(try app.switch(accessibilityLabel: "A switch"))
+    }
+
+    func test_doesNotFindAHiddenSwitch() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.switch(accessibilityLabel: "A hidden switch"))
+    }
+
+    func test_togglesASwitch() throws {
+        let app = App(controller: FormViewController())
+        let `switch` = try app.switch(accessibilityLabel: "A switch")
+        XCTAssertNotNil(try app.label(text: "Disabled"))
+
+        `switch`?.toggle()
+        XCTAssertNotNil(try app.label(text: "Enabled"))
+    }
+
+    func test_doesNotToggleADisabledSwitch() throws {
+        let app = App(controller: FormViewController())
+        let `switch` = try app.switch(accessibilityLabel: "A disabled switch")
+        XCTAssertNotNil(try app.label(text: "Disabled"))
+
+        `switch`?.toggle()
+        XCTAssertNotNil(try app.label(text: "Disabled"))
+    }
+
     // MARK: Failure behavior
 
     func test_aMissingElement_raisesAnError() throws {

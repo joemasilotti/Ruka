@@ -13,11 +13,17 @@ class TableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        installLabel()
+        installTableView()
+    }
 
+    private func installLabel() {
         label.text = "Label text"
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
+    }
 
+    private func installTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellIdentifier")
         tableView.dataSource = self
         tableView.delegate = self
