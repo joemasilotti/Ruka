@@ -54,7 +54,7 @@ Pushing/popping and presenting/dismissing view controllers is supported.
 
 ## `UITableView`
 
-* `app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` containing a label matching the text
+* `app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
 * `app.tapCell(containingText: "Cell text")` - taps the found cell (above) via its index path and delegate
 
 ## To-do
