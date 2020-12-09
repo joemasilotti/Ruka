@@ -36,7 +36,6 @@ class RootViewController: UIViewController {
         _ = addButton(title: "Push view controller", action: #selector(pushViewController))
         _ = addButton(title: "Pop view controller", action: #selector(popViewController))
         _ = addButton(title: "Present view controller", action: #selector(presentViewController))
-        _ = addButton(title: "Dismiss view controller", action: #selector(dismissViewController))
 
         _ = addButton(title: "Show alert", action: #selector(showAlert))
     }
@@ -72,11 +71,7 @@ class RootViewController: UIViewController {
     }
 
     @objc private func presentViewController() {
-        present(RootViewController(), animated: true)
-    }
-
-    @objc private func dismissViewController() {
-        dismiss(animated: true)
+        present(ModalViewController(), animated: true)
     }
 
     @objc private func showAlert() {

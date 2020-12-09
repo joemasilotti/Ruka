@@ -7,38 +7,21 @@ public struct App {
         case doNothing
     }
 
-    private enum RukaError: Error {
-        case unfoundElement
-    }
-
-    public var alertViewController: UIAlertController? {
-        controller as? UIAlertController
-    }
-
-    public var tableView: UITableView? {
-        controller.view.findViews(subclassOf: UITableView.self).first
-    }
-
-    internal var controller: UIViewController! {
-        if let navigationController = window.rootViewController as? UINavigationController {
-            return navigationController.topViewController
-        } else if let presentedController = window.rootViewController?.presentedViewController {
-            return presentedController
-        }
-        return window.rootViewController
-    }
-
-    private let failureBehavior: FailureBehavior
-    private let window = UIWindow()
-
     public init(controller: UIViewController, failureBehavior: FailureBehavior = .failTest) {
-        window.rootViewController = controller
-        window.makeKeyAndVisible()
-        controller.loadViewIfNeeded()
-        controller.view.layoutIfNeeded()
-
         self.failureBehavior = failureBehavior
+
+        load(controller: controller)
     }
+
+    public init(storyboard: String, identifier: String, failureBehavior: FailureBehavior = .failTest) {
+        self.failureBehavior = failureBehavior
+
+        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: identifier)
+        load(controller: controller)
+    }
+
+    // MARK: UILabel
 
     public func label(text: String, file: StaticString = #filePath, line: UInt = #line) throws -> UILabel? {
         let labels = controller.view.findViews(subclassOf: UILabel.self)
@@ -50,6 +33,8 @@ public struct App {
         return label
     }
 
+    // MARK: UIButton
+
     public func button(title: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIButton? {
         let buttons = controller.view.findViews(subclassOf: UIButton.self)
         let button = buttons.first(where: { $0.title(for: .normal) == title && !$0.isHidden })
@@ -58,6 +43,12 @@ public struct App {
             try failOrRaise("Could not find button with text '\(title)'.", file: file, line: line)
         }
         return button
+    }
+
+    // MARK: UITableView
+
+    public var tableView: UITableView? {
+        controller.view.findViews(subclassOf: UITableView.self).first
     }
 
     public func cell(containingText text: String, file: StaticString = #filePath, line: UInt = #line) throws -> UITableViewCell? {
@@ -81,6 +72,8 @@ public struct App {
         tableView.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
 
+    // MARK: UISwitch
+
     public func `switch`(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISwitch? {
         let switches = controller.view.findViews(subclassOf: UISwitch.self)
         let `switch` = switches.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
@@ -90,6 +83,8 @@ public struct App {
         }
         return `switch`
     }
+
+    // MARK: UIStepper
 
     public func stepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIStepper? {
         let steppers = controller.view.findViews(subclassOf: UIStepper.self)
@@ -111,6 +106,37 @@ public struct App {
         guard let stepper = try self.stepper(accessibilityLabel: label), stepper.isEnabled else { return }
         stepper.value -= stepper.stepValue
         stepper.sendActions(for: .valueChanged)
+    }
+
+    // MARK: UIAlertController
+
+    public var alertViewController: UIAlertController? {
+        controller as? UIAlertController
+    }
+
+    // MARK: Private
+
+    private enum RukaError: Error {
+        case unfoundElement
+    }
+
+    private let failureBehavior: FailureBehavior
+    private let window = UIWindow()
+
+    private var controller: UIViewController! {
+        if let navigationController = window.rootViewController as? UINavigationController {
+            return navigationController.topViewController
+        } else if let presentedController = window.rootViewController?.presentedViewController {
+            return presentedController
+        }
+        return window.rootViewController
+    }
+
+    private func load(controller: UIViewController) {
+        window.rootViewController = controller
+        window.makeKeyAndVisible()
+        controller.loadViewIfNeeded()
+        controller.view.layoutIfNeeded()
     }
 
     private func failOrRaise(_ message: String, file: StaticString, line: UInt) throws {

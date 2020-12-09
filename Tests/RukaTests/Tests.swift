@@ -1,9 +1,16 @@
-@testable import Ruka
+import Ruka
 import XCTest
 
 class Tests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
+    }
+
+    // MARK: Storyboard
+
+    func test_findsAStoryboardBackedController() throws {
+        let app = App(storyboard: "Main", identifier: "UIViewController identifier")
+        XCTAssertNotNil(try app.label(text: "Storyboard label text"))
     }
 
     // MARK: UILabel
@@ -95,15 +102,14 @@ class Tests: XCTestCase {
 
     func test_dismissesAViewController() throws {
         let controller = RootViewController()
-        let app = App(controller: controller)
+        let app = App(controller: controller, failureBehavior: .doNothing)
+        XCTAssertNil(try app.button(title: "Dismiss view controller"))
 
         try app.button(title: "Present view controller")?.tap()
-        XCTAssertNotNil(controller.presentedViewController)
-        XCTAssertNotNil(app.controller.presentingViewController)
+        XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
 
         try app.button(title: "Dismiss view controller")?.tap()
-        XCTAssertNil(controller.presentedViewController)
-        XCTAssertNil(app.controller.presentingViewController)
+        XCTAssertNil(try app.button(title: "Dismiss view controller"))
     }
 
     // MARK: UIAlertController
