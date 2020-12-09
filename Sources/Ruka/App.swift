@@ -108,6 +108,24 @@ public struct App {
         stepper.sendActions(for: .valueChanged)
     }
 
+    // MARK: UIStlider
+
+    public func slider(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISlider? {
+        let sliders = controller.view.findViews(subclassOf: UISlider.self)
+        let slider = sliders.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+
+        if slider == nil, failureBehavior != .doNothing {
+            try failOrRaise("Could not find slider with accessibility label '\(label)'.", file: file, line: line)
+        }
+        return slider
+    }
+
+    public func setSlider(accessibilityLabel label: String, value: Float, file: StaticString = #filePath, line: UInt = #line) throws {
+        guard let slider = try self.slider(accessibilityLabel: label), slider.isEnabled else { return }
+        slider.setValue(value, animated: false)
+        slider.sendActions(for: .valueChanged)
+    }
+
     // MARK: UIAlertController
 
     public var alertViewController: UIAlertController? {

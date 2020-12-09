@@ -222,6 +222,30 @@ class Tests: XCTestCase {
         XCTAssertNotNil(try app.label(text: "2.0"))
     }
 
+    // MARK: UISlider
+
+    func test_findsASlider() throws {
+        let app = App(controller: FormViewController())
+        XCTAssertNotNil(try app.slider(accessibilityLabel: "A slider"))
+    }
+
+    func test_doesNotFindAHiddenSlider() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.slider(accessibilityLabel: "A hidden slider"))
+    }
+
+    func test_setsASlidersValue() throws {
+        let app = App(controller: FormViewController())
+        try app.setSlider(accessibilityLabel: "A slider", value: 3)
+        XCTAssertNotNil(try app.label(text: "3.0"))
+    }
+
+    func test_doesNotSetADisabledSlidersValue() throws {
+        let app = App(controller: FormViewController())
+        try app.setSlider(accessibilityLabel: "A disabled slider", value: 3)
+        XCTAssertNotNil(try app.label(text: "2.0"))
+    }
+
     // MARK: Failure behavior
 
     func test_aMissingElement_raisesAnError() throws {

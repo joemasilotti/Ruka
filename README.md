@@ -46,13 +46,17 @@ See the unit tests for more examples.
 
 `switch(accessibilityLabel:)` - find a non-hidden switch with the given `accessibilityLabel`, recursively, in the view
 
+### `UITableView`
+
+`app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
+
 ### `UIStepper`
 
 `stepper(accessibilityLabel:)` - finds a non-hidden stepper with the given `accessibilityLabel`, recursively, in the view
 
-### `UITableView`
+### `UISlider`
 
-`app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
+`app.slider(accessibilityLabel:))` - finds a non-hidden slider with the given `accessibilityLabel`, recursively, in the view
 
 ## Interactions
 
@@ -68,10 +72,14 @@ See the unit tests for more examples.
 
 `app.tapCell(containingText: "Cell text")` - taps the found cell (above) via its index path and delegate
 
-### `incrementStepper()` and `decrementStepper()`
+### `incrementStepper(accessibilityLabel:)` and `decrementStepper(accessibilityLabel:)`
 
 * `app.incrementStepper(accessibilityLabel:)` - increments the stepper by the step value and triggers the value changed action, if not disabled
 * `app.decrementStepper(accessibilityLabel:)` - decrements the stepper by the step value and triggers the value changed action, if not disabled
+
+### `setSlider(accessibilityLabel:value:)`
+
+ `setSlider(accessibilityLabel:value:)` - sets the slider to the value and triggers the value changed action, if not disabled
 
 ## View controllers
 
@@ -83,7 +91,6 @@ Pushing/popping and presenting/dismissing view controllers is supported.
 
 ## To-do
 
-1. Sliders
 1. Text fields
 1. Gestures - swiping and scrolling
 1. Collection views
