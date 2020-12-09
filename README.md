@@ -32,70 +32,57 @@ let app = App(storyboard: "Main", identifier: "Some identifier")
 
 See the unit tests for more examples.
 
-## View finders
+## API
+
+First, create a reference to an `app` instance with your controller, as shown above.
+
+The "top" view controller's view will be searched. For example, a controller pushed onto a navigation stack or presented modally.
 
 ### Label
 
-`label(text:)` - find a non-hidden label with the given `text`, recursively, in the view
+`let label = try app.label(text:)` - find a non-hidden label with the given `text`, recursively, in the view
 
 ### Button
 
-`button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
+ `let button = try app.button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
+ 
+ `button?.tap()` - triggers the target-action for the button if not disabled
 
 ### Switch
 
-`switch(accessibilityLabel:)` - find a non-hidden switch with the given `accessibilityLabel`, recursively, in the view
+`let aSwitch = try app.switch(accessibilityLabel:)` - find a non-hidden switch with the given `accessibilityLabel`, recursively, in the view
+
+`aSwitch?.toggle()` - triggers the value changed action on the switch if not disabled
 
 ### Table cell
 
-`app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
+`try app.cell(containingText:)` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
+
+`app.tapCell(containingText:)` - taps the found cell (above) via its index path and delegate
 
 ### Stepper
 
-`stepper(accessibilityLabel:)` - finds a non-hidden stepper with the given `accessibilityLabel`, recursively, in the view
+`try app.stepper(accessibilityLabel:)` - finds a non-hidden stepper with the given `accessibilityLabel`, recursively, in the view
+
+ `app.incrementStepper(accessibilityLabel:)` - increments the stepper by the step value and triggers the value changed action, if not disabled
+ 
+ `app.decrementStepper(accessibilityLabel:)` - decrements the stepper by the step value and triggers the value changed action, if not disabled
 
 ### Slider
 
-`app.slider(accessibilityLabel:)` - finds a non-hidden slider with the given `accessibilityLabel`, recursively, in the view
+`try app.slider(accessibilityLabel:)` - finds a non-hidden slider with the given `accessibilityLabel`, recursively, in the view
+
+`setSlider(accessibilityLabel:value:)` - sets the slider to the value and triggers the value changed action, if not disabled
 
 ### Text fields
 
-`app.textField(placeholder:)` - finds a non-hidden text field with the given `placeholder`, recursively , in the view
+`let textField = try app.textField(placeholder:)` - finds a non-hidden text field with the given `placeholder`, recursively , in the view
 
-## Interactions
+ `textField?.type(text:)` - sets the text field's value and calls `textField(_:, shouldChangeCharactersIn:, replacementString:)` on the delegate, if not disabled
 
-### Tap a button
+### Alerts
 
-`button.tap()` - triggers the target-action for the button if not disabled
-
-### Toggle a switch
-
-`switch.toggle()` - triggers the value changed action on the switch if not disabled
-
-### Tap a table cell
-
-`app.tapCell(containingText: "Cell text")` - taps the found cell (above) via its index path and delegate
-
-### Increment or decrement a stepper
-
-* `app.incrementStepper(accessibilityLabel:)` - increments the stepper by the step value and triggers the value changed action, if not disabled
-* `app.decrementStepper(accessibilityLabel:)` - decrements the stepper by the step value and triggers the value changed action, if not disabled
-
-### Set a slider's value
-
- `setSlider(accessibilityLabel:value:)` - sets the slider to the value and triggers the value changed action, if not disabled
-
- ### Type into a text field
-
- `textField.type(text:)` - sets the text field's value and calls `textField(_:, shouldChangeCharactersIn:, replacementString:)` on the delegate, if not disabled
-
-## View controller
-
-Pushing/popping and presenting/dismissing view controllers is supported.
-
-## Alert
-
-`app.alertViewController.tapButton(title: "Dismiss")` - triggers the attached action and dismisses the alert
+`app.alertViewController?.tapButton(title:)` - triggers the attached action and dismisses the alert
 
 ## To-do
 
