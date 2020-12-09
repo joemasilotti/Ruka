@@ -246,6 +246,36 @@ class Tests: XCTestCase {
         XCTAssertNotNil(try app.label(text: "2.0"))
     }
 
+    // MARK: UITextField
+
+    func test_findsATextField() throws {
+        let app = App(controller: FormViewController())
+        XCTAssertNotNil(try app.textField(placeholder: "Text field placeholder"))
+    }
+
+    func test_doesNotFindAHiddenTextField() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.textField(placeholder: "Hidden text field placeholder"))
+    }
+
+    func test_typesIntoATextField() throws {
+        let app = App(controller: FormViewController())
+        let textField = try app.textField(placeholder: "Text field placeholder")
+
+        textField?.type(text: "Some typed text.")
+        XCTAssertEqual(textField?.text, "Some typed text.")
+        XCTAssertNotNil(try app.label(text: "Some typed text."))
+    }
+
+    func test_doesNotTypeIntoADisabledTextField() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        let textField = try app.textField(placeholder: "Disabled text field placeholder")
+
+        textField?.type(text: "Some typed text.")
+        XCTAssertEqual(textField?.text, "")
+        XCTAssertNil(try app.label(text: "Some typed text."))
+    }
+
     // MARK: Failure behavior
 
     func test_aMissingElement_raisesAnError() throws {

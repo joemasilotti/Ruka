@@ -138,6 +138,18 @@ public struct App {
         slider.sendActions(for: .valueChanged)
     }
 
+    // MARK: UITextField
+
+    public func textField(placeholder: String, file: StaticString = #filePath, line: UInt = #line) throws -> UITextField? {
+        let textFields = controller.view.findViews(subclassOf: UITextField.self)
+        let textField = textFields.first(where: { $0.placeholder == placeholder && !$0.isHidden })
+
+        if textField == nil, failureBehavior != .doNothing {
+            try failOrRaise("Could not find text field with placeholder '\(placeholder)'.", file: file, line: line)
+        }
+        return textField
+    }
+
     // MARK: UIAlertController
 
     public var alertViewController: UIAlertController? {

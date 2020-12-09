@@ -56,7 +56,11 @@ See the unit tests for more examples.
 
 ### Slider
 
-`app.slider(accessibilityLabel:))` - finds a non-hidden slider with the given `accessibilityLabel`, recursively, in the view
+`app.slider(accessibilityLabel:)` - finds a non-hidden slider with the given `accessibilityLabel`, recursively, in the view
+
+### Text fields
+
+`app.textField(placeholder:)` - finds a non-hidden text field with the given `placeholder`, recursively , in the view
 
 ## Interactions
 
@@ -81,6 +85,10 @@ See the unit tests for more examples.
 
  `setSlider(accessibilityLabel:value:)` - sets the slider to the value and triggers the value changed action, if not disabled
 
+ ### Type into a text field
+
+ `textField.type(text:)` - sets the text field's value and calls `textField(_:, shouldChangeCharactersIn:, replacementString:)` on the delegate, if not disabled
+
 ## View controller
 
 Pushing/popping and presenting/dismissing view controllers is supported.
@@ -91,7 +99,6 @@ Pushing/popping and presenting/dismissing view controllers is supported.
 
 ## To-do
 
-1. Text field
 1. Gesture - swiping and scrolling
 1. Collection view
 1. Map view
