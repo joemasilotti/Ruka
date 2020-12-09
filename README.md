@@ -19,9 +19,13 @@ In your `XCTestCase` tests...
 ```swift
 continueAfterFailure = false
 
-let app = App()
-let controller = /* your controller */
-app.load(controller: controller)
+// Code-powered views
+let controller = SomeViewController()
+let app = App(controller: controller)
+
+// Storyboard-powered views
+let controller = SomeViewController()
+let app = App(storyboard: "Main", identifier: "Some identifier")
 
 // ...
 ```
