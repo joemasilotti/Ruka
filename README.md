@@ -42,7 +42,7 @@ See the unit tests for more examples.
 
 `button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
 
-### Switche
+### Switch
 
 `switch(accessibilityLabel:)` - find a non-hidden switch with the given `accessibilityLabel`, recursively, in the view
 
