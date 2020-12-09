@@ -34,70 +34,70 @@ See the unit tests for more examples.
 
 ## View finders
 
-### `UILabel`
+### Label
 
 `label(text:)` - find a non-hidden label with the given `text`, recursively, in the view
 
-### `UIButton`
+### Button
 
 `button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
 
-### `UISwitch`
+### Switche
 
 `switch(accessibilityLabel:)` - find a non-hidden switch with the given `accessibilityLabel`, recursively, in the view
 
-### `UITableView`
+### Table cell
 
 `app.cell(containingText: "Cell text")` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
 
-### `UIStepper`
+### Stepper
 
 `stepper(accessibilityLabel:)` - finds a non-hidden stepper with the given `accessibilityLabel`, recursively, in the view
 
-### `UISlider`
+### Slider
 
 `app.slider(accessibilityLabel:))` - finds a non-hidden slider with the given `accessibilityLabel`, recursively, in the view
 
 ## Interactions
 
-### `tap()`
+### Tap a button
 
 `button.tap()` - triggers the target-action for the button if not disabled
 
-### `toggle()`
+### Toggle a switch
 
 `switch.toggle()` - triggers the value changed action on the switch if not disabled
 
-### `tapCell(containingText:)`
+### Tap a table cell
 
 `app.tapCell(containingText: "Cell text")` - taps the found cell (above) via its index path and delegate
 
-### `incrementStepper(accessibilityLabel:)` and `decrementStepper(accessibilityLabel:)`
+### Increment or decrement a stepper
 
 * `app.incrementStepper(accessibilityLabel:)` - increments the stepper by the step value and triggers the value changed action, if not disabled
 * `app.decrementStepper(accessibilityLabel:)` - decrements the stepper by the step value and triggers the value changed action, if not disabled
 
-### `setSlider(accessibilityLabel:value:)`
+### Set a slider's value
 
  `setSlider(accessibilityLabel:value:)` - sets the slider to the value and triggers the value changed action, if not disabled
 
-## View controllers
+## View controller
 
 Pushing/popping and presenting/dismissing view controllers is supported.
 
-## `UIAlertController`
+## Alert
 
 `app.alertViewController.tapButton(title: "Dismiss")` - triggers the attached action and dismisses the alert
 
 ## To-do
 
-1. Text fields
-1. Gestures - swiping and scrolling
-1. Collection views
-1. Map views
+1. Text field
+1. Gesture - swiping and scrolling
+1. Collection view
+1. Map view
 1. ...
 
 ## Out of scope (for now)
 
-1. System alerts - this probably isn't be possible
+1. System alert - this probably isn't be possible
 1. SwiftUI - [ViewInspector](https://github.com/nalexn/ViewInspector) is probably a better choice
