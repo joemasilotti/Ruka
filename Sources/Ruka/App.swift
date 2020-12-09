@@ -65,7 +65,7 @@ public struct App {
     public func tapCell(containingText text: String, file: StaticString = #filePath, line: UInt = #line) throws {
         guard
             let tableView = tableView,
-            let tableViewCell = try cell(containingText: text),
+            let tableViewCell = try cell(containingText: text, file: file, line: line),
             let indexPath = tableView.indexPath(for: tableViewCell)
         else { return }
 
@@ -97,13 +97,21 @@ public struct App {
     }
 
     public func incrementStepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard let stepper = try self.stepper(accessibilityLabel: label), stepper.isEnabled else { return }
+        guard
+            let stepper = try self.stepper(accessibilityLabel: label, file: file, line: line),
+            stepper.isEnabled
+        else { return }
+
         stepper.value += stepper.stepValue
         stepper.sendActions(for: .valueChanged)
     }
 
     public func decrementStepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard let stepper = try self.stepper(accessibilityLabel: label), stepper.isEnabled else { return }
+        guard
+            let stepper = try self.stepper(accessibilityLabel: label, file: file, line: line),
+            stepper.isEnabled
+        else { return }
+
         stepper.value -= stepper.stepValue
         stepper.sendActions(for: .valueChanged)
     }
@@ -121,7 +129,11 @@ public struct App {
     }
 
     public func setSlider(accessibilityLabel label: String, value: Float, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard let slider = try self.slider(accessibilityLabel: label), slider.isEnabled else { return }
+        guard
+            let slider = try self.slider(accessibilityLabel: label, file: file, line: line),
+            slider.isEnabled
+        else { return }
+
         slider.setValue(value, animated: false)
         slider.sendActions(for: .valueChanged)
     }
