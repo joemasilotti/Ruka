@@ -56,9 +56,9 @@ The "top" view controller's view will be searched. For example, a controller pus
 
 ### Table cell
 
-`try app.cell(containingText:)` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
+`let cell = try app.cell(containingText:)` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
 
-`app.tapCell(containingText:)` - taps the found cell (above) via its index path and delegate
+`cell?.tap()` - taps the cell via its index path and delegate
 
 ### Stepper
 

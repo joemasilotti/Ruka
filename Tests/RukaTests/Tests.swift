@@ -152,7 +152,7 @@ class Tests: XCTestCase {
 
     func test_tapsACell() throws {
         let app = App(controller: TableViewController())
-        try app.tapCell(containingText: "Three")
+        try app.cell(containingText: "Three")?.tap()
         XCTAssertNotNil(try app.label(text: "Changed label text"))
     }
 

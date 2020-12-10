@@ -24,7 +24,7 @@ class TableViewController: UIViewController {
     }
 
     private func installTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CellIdentifier")
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "CellIdentifier")
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -48,8 +48,8 @@ extension TableViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath)
-        cell.textLabel?.text = strings[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CellIdentifier", for: indexPath) as! TableViewCell
+        cell.label.text = strings[indexPath.row]
         return cell
     }
 }
@@ -57,5 +57,27 @@ extension TableViewController: UITableViewDataSource {
 extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         label.text = "Changed label text"
+    }
+}
+
+private class TableViewCell: UITableViewCell {
+    let label = UILabel()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(label)
+
+        NSLayoutConstraint.activate([
+            label.bottomAnchor.constraint(equalTo: bottomAnchor),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor),
+            label.topAnchor.constraint(equalTo: bottomAnchor),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError()
     }
 }

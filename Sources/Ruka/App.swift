@@ -62,16 +62,6 @@ public struct App {
         return tableViewCell
     }
 
-    public func tapCell(containingText text: String, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard
-            let tableView = tableView,
-            let tableViewCell = try cell(containingText: text, file: file, line: line),
-            let indexPath = tableView.indexPath(for: tableViewCell)
-        else { return }
-
-        tableView.delegate?.tableView?(tableView, didSelectRowAt: indexPath)
-    }
-
     // MARK: UISwitch
 
     public func `switch`(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISwitch? {
