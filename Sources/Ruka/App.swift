@@ -156,12 +156,24 @@ public struct App {
     private let window = UIWindow()
 
     private var controller: UIViewController! {
-        if let navigationController = window.rootViewController as? UINavigationController {
-            return navigationController.topViewController
-        } else if let presentedController = window.rootViewController?.presentedViewController {
-            return presentedController
-        }
-        return window.rootViewController
+        return visibleViewController(from: window.rootViewController)
+    }
+    
+    private func visibleViewController(from viewController: UIViewController?) -> UIViewController? {
+      
+      if let navigationController = viewController as? UINavigationController {
+        return visibleViewController(from: navigationController.topViewController)
+      }
+      
+      if let tabBarController = viewController as? UITabBarController {
+        return visibleViewController(from: tabBarController.selectedViewController)
+      }
+      
+      if let presentedViewController = viewController?.presentedViewController {
+        return visibleViewController(from: presentedViewController)
+      }
+      
+      return viewController
     }
 
     private func load(controller: UIViewController) {
