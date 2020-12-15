@@ -25,10 +25,22 @@ class RootViewController: UIViewController {
     }
 
     private func installSubviews() {
+        installLabels()
+        installButtons()
+    }
+
+    private func installLabels() {
         label.text = "Label text"
         stackView.addArrangedSubview(label)
         _ = addLabel(text: "Hidden label text", isHidden: true)
 
+        let offScreenLabel = UILabel()
+        offScreenLabel.text = "Off screen label text"
+        view.addSubview(offScreenLabel)
+        offScreenLabel.frame.origin.y = -100
+    }
+
+    private func installButtons() {
         _ = addButton(title: "Button title")
         _ = addButton(title: "Hidden button title", isHidden: true)
         _ = addButton(title: "Disabled button title", isEnabled: false)
@@ -38,6 +50,11 @@ class RootViewController: UIViewController {
         _ = addButton(title: "Present view controller", action: #selector(presentViewController))
 
         _ = addButton(title: "Show alert", action: #selector(showAlert))
+
+        let offScreenButton = UIButton()
+        offScreenButton.setTitle("Off screen button title", for: .normal)
+        view.addSubview(offScreenButton)
+        offScreenButton.frame.origin.y = -100
     }
 
     private func addLabel(text: String, isHidden: Bool = false) -> UILabel {

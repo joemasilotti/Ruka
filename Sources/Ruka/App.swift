@@ -25,7 +25,7 @@ public struct App {
 
     public func label(text: String, file: StaticString = #filePath, line: UInt = #line) throws -> UILabel? {
         let labels = controller.view.findViews(subclassOf: UILabel.self)
-        let label = labels.first(where: { $0.text == text && !$0.isHidden })
+        let label = labels.first(where: { $0.text == text && !$0.isHidden && viewIsVisibleInController($0) })
 
         if label == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find label with text '\(text)'.", file: file, line: line)
@@ -37,7 +37,7 @@ public struct App {
 
     public func button(title: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIButton? {
         let buttons = controller.view.findViews(subclassOf: UIButton.self)
-        let button = buttons.first(where: { $0.title(for: .normal) == title && !$0.isHidden })
+        let button = buttons.first(where: { $0.title(for: .normal) == title && !$0.isHidden && viewIsVisibleInController($0) })
 
         if button == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find button with text '\(title)'.", file: file, line: line)
@@ -66,7 +66,7 @@ public struct App {
 
     public func `switch`(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISwitch? {
         let switches = controller.view.findViews(subclassOf: UISwitch.self)
-        let `switch` = switches.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+        let `switch` = switches.first(where: { $0.accessibilityLabel == label && !$0.isHidden && viewIsVisibleInController($0) })
 
         if `switch` == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find switch with accessibility label '\(label)'.", file: file, line: line)
@@ -78,7 +78,7 @@ public struct App {
 
     public func stepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIStepper? {
         let steppers = controller.view.findViews(subclassOf: UIStepper.self)
-        let stepper = steppers.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+        let stepper = steppers.first(where: { $0.accessibilityLabel == label && !$0.isHidden && viewIsVisibleInController($0) })
 
         if stepper == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find stepper with accessibility label '\(label)'.", file: file, line: line)
@@ -106,11 +106,11 @@ public struct App {
         stepper.sendActions(for: .valueChanged)
     }
 
-    // MARK: UIStlider
+    // MARK: UISlider
 
     public func slider(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISlider? {
         let sliders = controller.view.findViews(subclassOf: UISlider.self)
-        let slider = sliders.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+        let slider = sliders.first(where: { $0.accessibilityLabel == label && !$0.isHidden && viewIsVisibleInController($0) })
 
         if slider == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find slider with accessibility label '\(label)'.", file: file, line: line)
@@ -132,7 +132,7 @@ public struct App {
 
     public func textField(placeholder: String, file: StaticString = #filePath, line: UInt = #line) throws -> UITextField? {
         let textFields = controller.view.findViews(subclassOf: UITextField.self)
-        let textField = textFields.first(where: { $0.placeholder == placeholder && !$0.isHidden })
+        let textField = textFields.first(where: { $0.placeholder == placeholder && !$0.isHidden && viewIsVisibleInController($0) })
 
         if textField == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find text field with placeholder '\(placeholder)'.", file: file, line: line)
@@ -169,6 +169,10 @@ public struct App {
         window.makeKeyAndVisible()
         controller.loadViewIfNeeded()
         controller.view.layoutIfNeeded()
+    }
+
+    private func viewIsVisibleInController(_ view: UIView) -> Bool {
+        view.frame.intersects(controller.view.bounds)
     }
 
     private func failOrRaise(_ message: String, file: StaticString, line: UInt) throws {

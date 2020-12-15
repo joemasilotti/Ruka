@@ -163,8 +163,8 @@
 		OBJ_14 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_15 /* FormViewController.swift */,
 				841FE769258040B200CBB8BF /* Main.storyboard */,
+				OBJ_15 /* FormViewController.swift */,
 				841FE7752580457900CBB8BF /* ModalViewController.swift */,
 				OBJ_16 /* RootViewController.swift */,
 				OBJ_17 /* TableViewController.swift */,

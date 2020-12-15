@@ -39,6 +39,12 @@ class FormViewController: UIViewController {
         addSwitch(accessibilityLabel: "A hidden switch", isHidden: true)
         addSwitch(accessibilityLabel: "A disabled switch", isEnabled: false)
 
+        let offScreenSwitch = UISwitch()
+        offScreenSwitch.accessibilityLabel = "An off screen switch"
+        offScreenSwitch.addTarget(self, action: #selector(toggleSwitch), for: .valueChanged)
+        view.addSubview(offScreenSwitch)
+        offScreenSwitch.frame.origin.y = -100
+
         switchlabel.text = "Disabled"
         stackView.addArrangedSubview(switchlabel)
     }
@@ -47,6 +53,13 @@ class FormViewController: UIViewController {
         addStepper(accessibilityLabel: "A stepper")
         addStepper(accessibilityLabel: "A hidden stepper", isHidden: true)
         addStepper(accessibilityLabel: "A disabled stepper", isEnabled: false)
+
+        let offScreenStepper = UIStepper()
+        offScreenStepper.accessibilityLabel = "An off screen stepper"
+        offScreenStepper.value = 2
+        offScreenStepper.addTarget(self, action: #selector(changeStepper), for: .valueChanged)
+        view.addSubview(offScreenStepper)
+        offScreenStepper.frame.origin.y = -100
 
         stepperLabel.text = "2.0"
         stackView.addArrangedSubview(stepperLabel)
@@ -57,6 +70,14 @@ class FormViewController: UIViewController {
         addSlider(accessibilityLabel: "A hidden slider", isHidden: true)
         addSlider(accessibilityLabel: "A disabled slider", isEnabled: false)
 
+        let offScreenSlider = UISlider()
+        offScreenSlider.value = 2
+        offScreenSlider.maximumValue = 4
+        offScreenSlider.accessibilityLabel = "An off screen slider"
+        offScreenSlider.addTarget(self, action: #selector(changeSlider), for: .valueChanged)
+        view.addSubview(offScreenSlider)
+        offScreenSlider.frame.origin.y = -100
+
         sliderLabel.text = "2.0"
         stackView.addArrangedSubview(sliderLabel)
     }
@@ -65,6 +86,12 @@ class FormViewController: UIViewController {
         addTextField(placeholder: "Text field placeholder")
         addTextField(placeholder: "Hidden text field placeholder", isHidden: true)
         addTextField(placeholder: "Disabled text field placeholder", isEnabled: false)
+
+        let offScreenTextField = UITextField()
+        offScreenTextField.placeholder = "Off screen text field placeholder"
+        offScreenTextField.delegate = self
+        view.addSubview(offScreenTextField)
+        offScreenTextField.frame.origin.y = -100
 
         stackView.addArrangedSubview(textFieldLabel)
     }

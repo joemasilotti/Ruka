@@ -38,47 +38,51 @@ First, create a reference to an `app` instance with your controller, as shown ab
 
 The "top" view controller's view will be searched. For example, a controller pushed onto a navigation stack or presented modally.
 
+The finders ignore views that are disabled or not in the controller's view's frame. For example, a view rendered off the screen cannot be found.
+
+Interaction with elements is ignored if the element is disabled.
+
 ### Label
 
-`let label = try app.label(text:)` - find a non-hidden label with the given `text`, recursively, in the view
+`let label = try app.label(text:)` - find a label with the given `text`
 
 ### Button
 
- `let button = try app.button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
+ `let button = try app.button(title:)` - find a button with the given `title`
  
- `button?.tap()` - triggers the target-action for the button if not disabled
+ `button?.tap()` - triggers the target-action for the button
 
 ### Switch
 
-`let aSwitch = try app.switch(accessibilityLabel:)` - find a non-hidden switch with the given `accessibilityLabel`, recursively, in the view
+`let aSwitch = try app.switch(accessibilityLabel:)` - find a switch with the given `accessibilityLabel`
 
-`aSwitch?.toggle()` - triggers the value changed action on the switch if not disabled
+`aSwitch?.toggle()` - triggers the value changed action on the switch
 
 ### Table cell
 
-`let cell = try app.cell(containingText:)` - finds the first `UITableViewCell` (or subclass) containing a label matching the text
+`let cell = try app.cell(containingText:)` - find the first `UITableViewCell` (or subclass) containing a label matching the text
 
 `cell?.tap()` - taps the cell via its index path and delegate
 
 ### Stepper
 
-`try app.stepper(accessibilityLabel:)` - finds a non-hidden stepper with the given `accessibilityLabel`, recursively, in the view
+`try app.stepper(accessibilityLabel:)` - find a stepper with the given `accessibilityLabel`
 
- `app.incrementStepper(accessibilityLabel:)` - increments the stepper by the step value and triggers the value changed action, if not disabled
+ `app.incrementStepper(accessibilityLabel:)` - increments the stepper by the step value and triggers the value changed action
  
- `app.decrementStepper(accessibilityLabel:)` - decrements the stepper by the step value and triggers the value changed action, if not disabled
+ `app.decrementStepper(accessibilityLabel:)` - decrements the stepper by the step value and triggers the value changed action
 
 ### Slider
 
-`try app.slider(accessibilityLabel:)` - finds a non-hidden slider with the given `accessibilityLabel`, recursively, in the view
+`try app.slider(accessibilityLabel:)` - find a slider with the given `accessibilityLabel`
 
-`setSlider(accessibilityLabel:value:)` - sets the slider to the value and triggers the value changed action, if not disabled
+`setSlider(accessibilityLabel:value:)` - sets the slider to the value and triggers the value changed action
 
 ### Text fields
 
-`let textField = try app.textField(placeholder:)` - finds a non-hidden text field with the given `placeholder`, recursively , in the view
+`let textField = try app.textField(placeholder:)` - find a text field with the given `placeholder`
 
- `textField?.type(text:)` - sets the text field's value and calls `textField(_:, shouldChangeCharactersIn:, replacementString:)` on the delegate, if not disabled
+ `textField?.type(text:)` - sets the text field's value and calls `textField(_:, shouldChangeCharactersIn:, replacementString:)` on the delegate
 
 ### Alerts
 

@@ -29,6 +29,11 @@ class Tests: XCTestCase {
         XCTAssertNil(try app.label(text: "Hidden label text"))
     }
 
+    func test_doesNotFindALabelOffTheScreen() throws {
+        let app = App(controller: RootViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.label(text: "Off screen label text"))
+    }
+
     // MARK: UIButton
 
     func test_findsAButton() throws {
@@ -45,6 +50,11 @@ class Tests: XCTestCase {
         let app = App(controller: controller, failureBehavior: .doNothing)
 
         XCTAssertNil(try app.button(title: "Hidden button title"))
+    }
+
+    func test_doesNotFindAButtonOffTheScreen() throws {
+        let app = App(controller: RootViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.button(title: "Off screen button title"))
     }
 
     func test_tapsAButton() throws {
@@ -168,6 +178,11 @@ class Tests: XCTestCase {
         XCTAssertNil(try app.switch(accessibilityLabel: "A hidden switch"))
     }
 
+    func test_doesNotFindASwitchOffTheScreen() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.switch(accessibilityLabel: "An off screen switch"))
+    }
+
     func test_togglesASwitch() throws {
         let app = App(controller: FormViewController())
         let `switch` = try app.switch(accessibilityLabel: "A switch")
@@ -196,6 +211,11 @@ class Tests: XCTestCase {
     func test_doesNotFindAHiddenStepper() throws {
         let app = App(controller: FormViewController(), failureBehavior: .doNothing)
         XCTAssertNil(try app.stepper(accessibilityLabel: "A hidden stepper"))
+    }
+
+    func test_doesNotFindAStepperOffTheScreen() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.stepper(accessibilityLabel: "An off screen stepper"))
     }
 
     func test_incrementsAStepper() throws {
@@ -234,6 +254,11 @@ class Tests: XCTestCase {
         XCTAssertNil(try app.slider(accessibilityLabel: "A hidden slider"))
     }
 
+    func test_doesNotFindASliderOffTheScreen() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.slider(accessibilityLabel: "An off screen slider"))
+    }
+
     func test_setsASlidersValue() throws {
         let app = App(controller: FormViewController())
         try app.setSlider(accessibilityLabel: "A slider", value: 3)
@@ -256,6 +281,11 @@ class Tests: XCTestCase {
     func test_doesNotFindAHiddenTextField() throws {
         let app = App(controller: FormViewController(), failureBehavior: .doNothing)
         XCTAssertNil(try app.textField(placeholder: "Hidden text field placeholder"))
+    }
+
+    func test_doesNotFindATextFieldOffTheScreen() throws {
+        let app = App(controller: FormViewController(), failureBehavior: .doNothing)
+        XCTAssertNil(try app.textField(placeholder: "Off screen text field placeholder"))
     }
 
     func test_typesIntoATextField() throws {
