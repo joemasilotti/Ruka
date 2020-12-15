@@ -25,7 +25,7 @@ public struct App {
 
     public func label(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UILabel? {
         let labels = controller.view.findViews(subclassOf: UILabel.self)
-        let label = labels.first(where: { ($0.text == identifier || $0.accessibilityLabel == identifier || $0.accessibilityIdentifier == identifier) && !$0.isHidden && viewIsVisibleInController($0) })
+        let label = labels.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if label == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find label with text '\(identifier)'.", file: file, line: line)
@@ -37,7 +37,7 @@ public struct App {
 
     public func button(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIButton? {
         let buttons = controller.view.findViews(subclassOf: UIButton.self)
-        let button = buttons.first(where: { ($0.title(for: .normal) == identifier || $0.accessibilityLabel == identifier || $0.accessibilityIdentifier == identifier) && !$0.isHidden && viewIsVisibleInController($0) })
+        let button = buttons.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if button == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find button with text '\(identifier)'.", file: file, line: line)
@@ -66,7 +66,7 @@ public struct App {
 
     public func `switch`(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISwitch? {
         let switches = controller.view.findViews(subclassOf: UISwitch.self)
-        let `switch` = switches.first(where: { ($0.accessibilityLabel == identifier || $0.accessibilityIdentifier == identifier) && !$0.isHidden && viewIsVisibleInController($0) })
+        let `switch` = switches.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if `switch` == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find switch with accessibility label '\(identifier)'.", file: file, line: line)
@@ -78,7 +78,7 @@ public struct App {
 
     public func stepper(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIStepper? {
         let steppers = controller.view.findViews(subclassOf: UIStepper.self)
-        let stepper = steppers.first(where: { ($0.accessibilityLabel == identifier || $0.accessibilityIdentifier == identifier) && !$0.isHidden && viewIsVisibleInController($0) })
+        let stepper = steppers.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if stepper == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find stepper with accessibility label '\(identifier)'.", file: file, line: line)
@@ -110,7 +110,7 @@ public struct App {
 
     public func slider(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISlider? {
         let sliders = controller.view.findViews(subclassOf: UISlider.self)
-        let slider = sliders.first(where: { ($0.accessibilityLabel == identifier || $0.accessibilityIdentifier == identifier) && !$0.isHidden && viewIsVisibleInController($0) })
+        let slider = sliders.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if slider == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find slider with accessibility label '\(identifier)'.", file: file, line: line)
@@ -132,7 +132,7 @@ public struct App {
 
     public func textField(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UITextField? {
         let textFields = controller.view.findViews(subclassOf: UITextField.self)
-        let textField = textFields.first(where: { ($0.placeholder == identifier || $0.accessibilityLabel == identifier || $0.accessibilityIdentifier == identifier) && !$0.isHidden && viewIsVisibleInController($0) })
+        let textField = textFields.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if textField == nil, failureBehavior != .doNothing {
             try failOrRaise("Could not find text field with placeholder '\(identifier)'.", file: file, line: line)
