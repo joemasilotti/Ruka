@@ -34,6 +34,12 @@ class RootViewController: UIViewController {
         stackView.addArrangedSubview(label)
         _ = addLabel(text: "Hidden label text", isHidden: true)
 
+        let a11yLabeledLabel = addLabel(text: "")
+        a11yLabeledLabel.accessibilityLabel = "a11y labeled label"
+
+        let a11yIdentifiedLabel = addLabel(text: "")
+        a11yIdentifiedLabel.accessibilityIdentifier = "a11y identified label"
+
         let offScreenLabel = UILabel()
         offScreenLabel.text = "Off screen label text"
         view.addSubview(offScreenLabel)
@@ -50,6 +56,12 @@ class RootViewController: UIViewController {
         _ = addButton(title: "Present view controller", action: #selector(presentViewController))
 
         _ = addButton(title: "Show alert", action: #selector(showAlert))
+
+        let a11yLabeledButton = addButton(title: "")
+        a11yLabeledButton.accessibilityLabel = "a11y labeled button"
+
+        let a11yIdentifiedButton = addButton(title: "")
+        a11yIdentifiedButton.accessibilityIdentifier = "a11y identified button"
 
         let offScreenButton = UIButton()
         offScreenButton.setTitle("Off screen button title", for: .normal)

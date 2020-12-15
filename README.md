@@ -44,17 +44,17 @@ Interaction with elements is ignored if the element is disabled.
 
 ### Label
 
-`let label = try app.label(text:)` - find a label with the given `text`
+`let label = try app.label()` - find a label via `text` or accessibility label/identifier
 
 ### Button
 
- `let button = try app.button(title:)` - find a button with the given `title`
+ `let button = try app.button()` - find a button via `title` or accessibility label/identifier
  
  `button?.tap()` - triggers the target-action for the button
 
 ### Switch
 
-`let aSwitch = try app.switch(accessibilityLabel:)` - find a switch with the given `accessibilityLabel`
+`let aSwitch = try app.switch()` - find a switch via accessibility label/identifier
 
 `aSwitch?.toggle()` - triggers the value changed action on the switch
 
@@ -66,21 +66,21 @@ Interaction with elements is ignored if the element is disabled.
 
 ### Stepper
 
-`try app.stepper(accessibilityLabel:)` - find a stepper with the given `accessibilityLabel`
+`try app.stepper()` - find a stepper via accessibility label/identifier
 
- `app.incrementStepper(accessibilityLabel:)` - increments the stepper by the step value and triggers the value changed action
+ `app.incrementStepper()` - increments the stepper by the step value and triggers the value changed action
  
- `app.decrementStepper(accessibilityLabel:)` - decrements the stepper by the step value and triggers the value changed action
+ `app.decrementStepper()` - decrements the stepper by the step value and triggers the value changed action
 
 ### Slider
 
-`try app.slider(accessibilityLabel:)` - find a slider with the given `accessibilityLabel`
+`try app.slider()` - find a slider via accessibility label/identifier
 
-`setSlider(accessibilityLabel:value:)` - sets the slider to the value and triggers the value changed action
+`setSlider(_:, value:)` - sets the slider to the value and triggers the value changed action
 
 ### Text fields
 
-`let textField = try app.textField(placeholder:)` - find a text field with the given `placeholder`
+`let textField = try app.textField()` - find a text field via `placeholder` or accessibility label/identifier
 
  `textField?.type(text:)` - sets the text field's value and calls `textField(_:, shouldChangeCharactersIn:, replacementString:)` on the delegate
 
