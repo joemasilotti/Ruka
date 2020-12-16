@@ -108,8 +108,55 @@ class Tests: XCTestCase {
         try app.button(title: "Present view controller")?.tap()
         XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
 
+        let async = expectation(description: "async")
         try app.button(title: "Dismiss view controller")?.tap()
+        DispatchQueue.main.async {
+            async.fulfill()
+        }
+        wait(for: [async], timeout: 1)
         XCTAssertNil(try app.button(title: "Dismiss view controller"))
+    }
+    
+    func test_dismissNestedModalViewController() throws {
+        let controller = RootViewController()
+        let app = App(controller: controller, failureBehavior: .doNothing)
+        XCTAssertNil(try app.button(title: "Dismiss view controller"))
+
+        try app.button(title: "Present view controller")?.tap()
+        XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
+        
+        try app.button(title: "Present view controller")?.tap()
+        XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
+
+        let async1 = expectation(description: "async")
+        try app.button(title: "Dismiss view controller")?.tap()
+        DispatchQueue.main.async {
+            async1.fulfill()
+        }
+        wait(for: [async1], timeout: 1)
+        XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
+        
+        let async2 = expectation(description: "async")
+        try app.button(title: "Dismiss view controller")?.tap()
+        DispatchQueue.main.async {
+            async2.fulfill()
+        }
+        wait(for: [async2], timeout: 1)
+        XCTAssertNil(try app.button(title: "Dismiss view controller"))
+    }
+    
+    // MARK: UITabBarController
+    
+    func test_presentsAViewControllerOnSecondTabInTabBarController() throws {
+        let tabBarController = TabBarViewController()
+        let app = App(controller: tabBarController, failureBehavior: .doNothing)
+        XCTAssertNil(try app.button(title: "Present view controller from second tab"))
+
+        tabBarController.selectedIndex = 1
+        XCTAssertNotNil(try app.button(title: "Present view controller from second tab"))
+        try app.button(title: "Present view controller from second tab")?.tap()
+        
+        XCTAssertNotNil(tabBarController.secondTabViewController.presentedViewController)
     }
 
     // MARK: UIAlertController
@@ -130,7 +177,12 @@ class Tests: XCTestCase {
         try app.button(title: "Show alert")?.tap()
         XCTAssertNil(try app.button(title: "Show alert"))
 
+        let async = expectation(description: "async")
         app.alertViewController?.tapButton(title: "Dismiss")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            async.fulfill()
+        }
+        wait(for: [async], timeout: 1)
         XCTAssertNotNil(try app.button(title: "Show alert"))
         XCTAssertNotNil(try app.label(text: "Changed label text"))
     }

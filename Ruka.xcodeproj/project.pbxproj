@@ -36,6 +36,9 @@
 		84E75E43258039E7001F8290 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E75E41258039E7001F8290 /* Main.storyboard */; };
 		84E75E45258039E8001F8290 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E75E44258039E8001F8290 /* Assets.xcassets */; };
 		84E75E48258039E8001F8290 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E75E46258039E8001F8290 /* LaunchScreen.storyboard */; };
+		F2D972DF258A876C0034F592 /* SecondTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D972DE258A876C0034F592 /* SecondTabViewController.swift */; };
+		F2D972E6258AACB10034F592 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D972E5258AACB10034F592 /* TabBarViewController.swift */; };
+		F2D972ED258AB0360034F592 /* NestedModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D972EC258AB0360034F592 /* NestedModalViewController.swift */; };
 		OBJ_37 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_48 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Tests.swift */; };
 		OBJ_49 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* FormViewController.swift */; };
@@ -90,6 +93,9 @@
 		84E75E44258039E8001F8290 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84E75E47258039E8001F8290 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84E75E49258039E8001F8290 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2D972DE258A876C0034F592 /* SecondTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTabViewController.swift; sourceTree = "<group>"; };
+		F2D972E5258AACB10034F592 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		F2D972EC258AB0360034F592 /* NestedModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedModalViewController.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		OBJ_13 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		OBJ_15 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
@@ -166,8 +172,11 @@
 				OBJ_15 /* FormViewController.swift */,
 				841FE769258040B200CBB8BF /* Main.storyboard */,
 				841FE7752580457900CBB8BF /* ModalViewController.swift */,
+				F2D972EC258AB0360034F592 /* NestedModalViewController.swift */,
 				OBJ_16 /* RootViewController.swift */,
 				OBJ_17 /* TableViewController.swift */,
+				F2D972DE258A876C0034F592 /* SecondTabViewController.swift */,
+				F2D972E5258AACB10034F592 /* TabBarViewController.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -372,9 +381,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				F2D972DF258A876C0034F592 /* SecondTabViewController.swift in Sources */,
+				F2D972ED258AB0360034F592 /* NestedModalViewController.swift in Sources */,
 				OBJ_48 /* Tests.swift in Sources */,
 				841FE7762580457900CBB8BF /* ModalViewController.swift in Sources */,
 				OBJ_49 /* FormViewController.swift in Sources */,
+				F2D972E6258AACB10034F592 /* TabBarViewController.swift in Sources */,
 				OBJ_50 /* RootViewController.swift in Sources */,
 				OBJ_51 /* TableViewController.swift in Sources */,
 			);
