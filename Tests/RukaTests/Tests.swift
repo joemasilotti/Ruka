@@ -250,25 +250,25 @@ class Tests: XCTestCase {
 
     func test_incrementsAStepper() throws {
         let app = App(controller: FormViewController())
-        try app.incrementStepper("A stepper")
+        try app.stepper("A stepper")?.increment()
         XCTAssertNotNil(try app.label("3.0"))
     }
 
     func test_decrementsAStepper() throws {
         let app = App(controller: FormViewController())
-        try app.decrementStepper("A stepper")
+        try app.stepper("A stepper")?.decrement()
         XCTAssertNotNil(try app.label("1.0"))
     }
 
     func test_doesNotIncrementADisabledStepper() throws {
         let app = App(controller: FormViewController())
-        try app.incrementStepper("A disabled stepper")
+        try app.stepper("A disabled stepper")?.increment()
         XCTAssertNotNil(try app.label("2.0"))
     }
 
     func test_doesNotDecrementADisabledStepper() throws {
         let app = App(controller: FormViewController())
-        try app.decrementStepper("A disabled stepper")
+        try app.stepper("A disabled stepper")?.decrement()
         XCTAssertNotNil(try app.label("2.0"))
     }
 
@@ -296,14 +296,14 @@ class Tests: XCTestCase {
 
     func test_setsASlidersValue() throws {
         let app = App(controller: FormViewController())
-        try app.setSlider("A slider", value: 3)
-        XCTAssertNotNil(try app.label("3.0"))
+        try app.slider("A slider")?.set(value: 30)
+        XCTAssertNotNil(try app.label("30.0"))
     }
 
     func test_doesNotSetADisabledSlidersValue() throws {
         let app = App(controller: FormViewController())
-        try app.setSlider("A disabled slider", value: 3)
-        XCTAssertNotNil(try app.label("2.0"))
+        try app.slider("A disabled slider")?.set(value: 30)
+        XCTAssertNotNil(try app.label("20.0"))
     }
 
     // MARK: UITextField

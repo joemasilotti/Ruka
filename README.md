@@ -66,17 +66,17 @@ Interaction with elements is ignored if the element is disabled.
 
 ### Stepper
 
-`try app.stepper()` - find a stepper via accessibility label/identifier
+`let stepper = try app.stepper()` - find a stepper via accessibility label/identifier
 
- `app.incrementStepper()` - increments the stepper by the step value and triggers the value changed action
+ `stepper?.increment()` - increments the stepper by the step value and triggers the value changed action
  
- `app.decrementStepper()` - decrements the stepper by the step value and triggers the value changed action
+ `stepper?.decrement()` - decrements the stepper by the step value and triggers the value changed action
 
 ### Slider
 
-`try app.slider()` - find a slider via accessibility label/identifier
+`let slider = try app.slider()` - find a slider via accessibility label/identifier
 
-`setSlider(_:, value:)` - sets the slider to the value and triggers the value changed action
+`slider?.set(value:)` - sets the slider to the value and triggers the value changed action
 
 ### Text fields
 

@@ -96,7 +96,7 @@ class FormViewController: UIViewController {
         view.addSubview(offScreenSlider)
         offScreenSlider.frame.origin.y = -100
 
-        sliderLabel.text = "2.0"
+        sliderLabel.text = "20.0"
         stackView.addArrangedSubview(sliderLabel)
     }
 
@@ -143,8 +143,8 @@ class FormViewController: UIViewController {
 
     private func addSlider(accessibilityLabel: String, isHidden: Bool = false, isEnabled: Bool = true) -> UISlider {
         let slider = UISlider()
-        slider.value = 2
-        slider.maximumValue = 4
+        slider.value = 20
+        slider.maximumValue = 40
         slider.isHidden = isHidden
         slider.isEnabled = isEnabled
         slider.accessibilityLabel = accessibilityLabel

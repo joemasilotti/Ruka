@@ -86,26 +86,6 @@ public struct App {
         return stepper
     }
 
-    public func incrementStepper(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard
-            let stepper = try self.stepper(identifier, file: file, line: line),
-            stepper.isEnabled
-        else { return }
-
-        stepper.value += stepper.stepValue
-        stepper.sendActions(for: .valueChanged)
-    }
-
-    public func decrementStepper(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard
-            let stepper = try self.stepper(identifier, file: file, line: line),
-            stepper.isEnabled
-        else { return }
-
-        stepper.value -= stepper.stepValue
-        stepper.sendActions(for: .valueChanged)
-    }
-
     // MARK: UISlider
 
     public func slider(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISlider? {
@@ -116,16 +96,6 @@ public struct App {
             try failOrRaise("Could not find slider with accessibility label '\(identifier)'.", file: file, line: line)
         }
         return slider
-    }
-
-    public func setSlider(_ identifier: String, value: Float, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard
-            let slider = try self.slider(identifier, file: file, line: line),
-            slider.isEnabled
-        else { return }
-
-        slider.setValue(value, animated: false)
-        slider.sendActions(for: .valueChanged)
     }
 
     // MARK: UITextField
