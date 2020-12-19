@@ -51,8 +51,7 @@ class Tests: XCTestCase {
         let controller = RootViewController()
         let app = App(controller: controller)
 
-        let button = try app.button(title: "Button title")
-        button?.tap()
+        try app.tapButton(title: "Button title")
 
         _ = try app.label(text: "Changed label text")
     }
@@ -61,8 +60,7 @@ class Tests: XCTestCase {
         let controller = RootViewController()
         let app = App(controller: controller, failureBehavior: .doNothing)
 
-        let button = try app.button(title: "Disabled button title")
-        button?.tap()
+        try app.tapButton(title: "Disabled button title")
 
         XCTAssertNil(try app.label(text: "Changed label text"))
     }
@@ -73,7 +71,7 @@ class Tests: XCTestCase {
         let navigationController = UINavigationController(rootViewController: RootViewController())
         let app = App(controller: navigationController)
 
-        try app.button(title: "Push view controller")?.tap()
+        try app.tapButton(title: "Push view controller")
 
         XCTAssertEqual(navigationController.viewControllers.count, 2)
     }
@@ -82,10 +80,10 @@ class Tests: XCTestCase {
         let navigationController = UINavigationController(rootViewController: RootViewController())
         let app = App(controller: navigationController)
 
-        try app.button(title: "Push view controller")?.tap()
+        try app.tapButton(title: "Push view controller")
         XCTAssertEqual(navigationController.viewControllers.count, 2)
 
-        try app.button(title: "Pop view controller")?.tap()
+        try app.tapButton(title: "Pop view controller")
         XCTAssertEqual(navigationController.viewControllers.count, 1)
     }
 
@@ -95,7 +93,7 @@ class Tests: XCTestCase {
         let controller = RootViewController()
         let app = App(controller: controller)
 
-        try app.button(title: "Present view controller")?.tap()
+        try app.tapButton(title: "Present view controller")
 
         XCTAssertNotNil(controller.presentedViewController)
     }
@@ -105,15 +103,10 @@ class Tests: XCTestCase {
         let app = App(controller: controller, failureBehavior: .doNothing)
         XCTAssertNil(try app.button(title: "Dismiss view controller"))
 
-        try app.button(title: "Present view controller")?.tap()
+        try app.tapButton(title: "Present view controller")
         XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
 
-        let async = expectation(description: "async")
-        try app.button(title: "Dismiss view controller")?.tap()
-        DispatchQueue.main.async {
-            async.fulfill()
-        }
-        wait(for: [async], timeout: 1)
+        try app.tapButton(title: "Dismiss view controller")
         XCTAssertNil(try app.button(title: "Dismiss view controller"))
     }
     
@@ -122,26 +115,16 @@ class Tests: XCTestCase {
         let app = App(controller: controller, failureBehavior: .doNothing)
         XCTAssertNil(try app.button(title: "Dismiss view controller"))
 
-        try app.button(title: "Present view controller")?.tap()
+        try app.tapButton(title: "Present view controller")
         XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
         
-        try app.button(title: "Present view controller")?.tap()
+        try app.tapButton(title: "Present view controller")
         XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
 
-        let async1 = expectation(description: "async")
-        try app.button(title: "Dismiss view controller")?.tap()
-        DispatchQueue.main.async {
-            async1.fulfill()
-        }
-        wait(for: [async1], timeout: 1)
+        try app.tapButton(title: "Dismiss view controller")
         XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
         
-        let async2 = expectation(description: "async")
-        try app.button(title: "Dismiss view controller")?.tap()
-        DispatchQueue.main.async {
-            async2.fulfill()
-        }
-        wait(for: [async2], timeout: 1)
+        try app.tapButton(title: "Dismiss view controller")
         XCTAssertNil(try app.button(title: "Dismiss view controller"))
     }
     
@@ -154,7 +137,7 @@ class Tests: XCTestCase {
 
         tabBarController.selectedIndex = 1
         XCTAssertNotNil(try app.button(title: "Present view controller from second tab"))
-        try app.button(title: "Present view controller from second tab")?.tap()
+        try app.tapButton(title: "Present view controller from second tab")
         
         XCTAssertNotNil(tabBarController.secondTabViewController.presentedViewController)
     }
@@ -165,7 +148,7 @@ class Tests: XCTestCase {
         let controller = RootViewController()
         let app = App(controller: controller)
 
-        try app.button(title: "Show alert")?.tap()
+        try app.tapButton(title: "Show alert")
         XCTAssertNotNil(try app.label(text: "Alert title"))
         XCTAssertNotNil(try app.label(text: "Alert message."))
     }
@@ -174,15 +157,10 @@ class Tests: XCTestCase {
         let controller = RootViewController()
         let app = App(controller: controller, failureBehavior: .doNothing)
 
-        try app.button(title: "Show alert")?.tap()
+        try app.tapButton(title: "Show alert")
         XCTAssertNil(try app.button(title: "Show alert"))
 
-        let async = expectation(description: "async")
         app.alertViewController?.tapButton(title: "Dismiss")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            async.fulfill()
-        }
-        wait(for: [async], timeout: 1)
         XCTAssertNotNil(try app.button(title: "Show alert"))
         XCTAssertNotNil(try app.label(text: "Changed label text"))
     }

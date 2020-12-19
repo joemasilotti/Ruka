@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		84146B152580386900A9768A /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146B0E2580386900A9768A /* UIButton.swift */; };
 		84146B162580386900A9768A /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146B142580386900A9768A /* UISwitch.swift */; };
 		84146B172580386900A9768A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146B112580386900A9768A /* App.swift */; };
 		84146B182580386900A9768A /* UIAlertController+ActionInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84146B122580386900A9768A /* UIAlertController+ActionInvoker.swift */; };
@@ -29,6 +28,7 @@
 		841FE76F2580435600CBB8BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841FE769258040B200CBB8BF /* Main.storyboard */; };
 		841FE7762580457900CBB8BF /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FE7752580457900CBB8BF /* ModalViewController.swift */; };
 		841FE7822581408300CBB8BF /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FE7812581408300CBB8BF /* UITextField.swift */; };
+		84584DCE258E83150098FDEE /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84584DCD258E83150098FDEE /* Animation.swift */; };
 		84BC452B2582A48100ED9837 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC452A2582A48100ED9837 /* UITableViewCell.swift */; };
 		84E75E3C258039E7001F8290 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E75E3B258039E7001F8290 /* AppDelegate.swift */; };
 		84E75E3E258039E7001F8290 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E75E3D258039E7001F8290 /* SceneDelegate.swift */; };
@@ -71,7 +71,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		84146B0E2580386900A9768A /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		84146B0F2580386900A9768A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84146B102580386900A9768A /* Ruka.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ruka.h; sourceTree = "<group>"; };
 		84146B112580386900A9768A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		841FE769258040B200CBB8BF /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		841FE7752580457900CBB8BF /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		841FE7812581408300CBB8BF /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		84584DCD258E83150098FDEE /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		84BC452A2582A48100ED9837 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		84E75E3B258039E7001F8290 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E75E3D258039E7001F8290 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -208,9 +208,9 @@
 			children = (
 				84146B102580386900A9768A /* Ruka.h */,
 				84146B0F2580386900A9768A /* Info.plist */,
+				84584DCD258E83150098FDEE /* Animation.swift */,
 				84146B112580386900A9768A /* App.swift */,
 				84146B122580386900A9768A /* UIAlertController+ActionInvoker.swift */,
-				84146B0E2580386900A9768A /* UIButton.swift */,
 				84146B142580386900A9768A /* UISwitch.swift */,
 				84BC452A2582A48100ED9837 /* UITableViewCell.swift */,
 				841FE7812581408300CBB8BF /* UITextField.swift */,
@@ -363,8 +363,8 @@
 				84146B162580386900A9768A /* UISwitch.swift in Sources */,
 				84146B172580386900A9768A /* App.swift in Sources */,
 				84146B182580386900A9768A /* UIAlertController+ActionInvoker.swift in Sources */,
-				84146B152580386900A9768A /* UIButton.swift in Sources */,
 				84BC452B2582A48100ED9837 /* UITableViewCell.swift in Sources */,
+				84584DCE258E83150098FDEE /* Animation.swift in Sources */,
 				841FE7822581408300CBB8BF /* UITextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

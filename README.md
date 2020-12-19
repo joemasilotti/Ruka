@@ -44,9 +44,9 @@ The "top" view controller's view will be searched. For example, a controller pus
 
 ### Button
 
- `let button = try app.button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
+ `try app.button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
  
- `button?.tap()` - triggers the target-action for the button if not disabled
+ `app.tapButton(title:)` - triggers the target-action for the non-hidden button with the given `title`, if not disabled
 
 ### Switch
 
