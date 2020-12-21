@@ -23,24 +23,24 @@ public struct App {
 
     // MARK: UILabel
 
-    public func label(text: String, file: StaticString = #filePath, line: UInt = #line) throws -> UILabel? {
+    public func label(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UILabel? {
         let labels = controller.view.findViews(subclassOf: UILabel.self)
-        let label = labels.first(where: { $0.text == text && !$0.isHidden })
+        let label = labels.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if label == nil, failureBehavior != .doNothing {
-            try failOrRaise("Could not find label with text '\(text)'.", file: file, line: line)
+            try failOrRaise("Could not find label with text '\(identifier)'.", file: file, line: line)
         }
         return label
     }
 
     // MARK: UIButton
 
-    public func button(title: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIButton? {
+    public func button(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIButton? {
         let buttons = controller.view.findViews(subclassOf: UIButton.self)
-        let button = buttons.first(where: { $0.title(for: .normal) == title && !$0.isHidden })
+        let button = buttons.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if button == nil, failureBehavior != .doNothing {
-            try failOrRaise("Could not find button with text '\(title)'.", file: file, line: line)
+            try failOrRaise("Could not find button with text '\(identifier)'.", file: file, line: line)
         }
         return button
     }
@@ -75,78 +75,48 @@ public struct App {
 
     // MARK: UISwitch
 
-    public func `switch`(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISwitch? {
+    public func `switch`(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISwitch? {
         let switches = controller.view.findViews(subclassOf: UISwitch.self)
-        let `switch` = switches.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+        let `switch` = switches.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if `switch` == nil, failureBehavior != .doNothing {
-            try failOrRaise("Could not find switch with accessibility label '\(label)'.", file: file, line: line)
+            try failOrRaise("Could not find switch with accessibility label '\(identifier)'.", file: file, line: line)
         }
         return `switch`
     }
 
     // MARK: UIStepper
 
-    public func stepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIStepper? {
+    public func stepper(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UIStepper? {
         let steppers = controller.view.findViews(subclassOf: UIStepper.self)
-        let stepper = steppers.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+        let stepper = steppers.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if stepper == nil, failureBehavior != .doNothing {
-            try failOrRaise("Could not find stepper with accessibility label '\(label)'.", file: file, line: line)
+            try failOrRaise("Could not find stepper with accessibility label '\(identifier)'.", file: file, line: line)
         }
         return stepper
     }
 
-    public func incrementStepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard
-            let stepper = try self.stepper(accessibilityLabel: label, file: file, line: line),
-            stepper.isEnabled
-        else { return }
+    // MARK: UISlider
 
-        stepper.value += stepper.stepValue
-        stepper.sendActions(for: .valueChanged)
-    }
-
-    public func decrementStepper(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard
-            let stepper = try self.stepper(accessibilityLabel: label, file: file, line: line),
-            stepper.isEnabled
-        else { return }
-
-        stepper.value -= stepper.stepValue
-        stepper.sendActions(for: .valueChanged)
-    }
-
-    // MARK: UIStlider
-
-    public func slider(accessibilityLabel label: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISlider? {
+    public func slider(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UISlider? {
         let sliders = controller.view.findViews(subclassOf: UISlider.self)
-        let slider = sliders.first(where: { $0.accessibilityLabel == label && !$0.isHidden })
+        let slider = sliders.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if slider == nil, failureBehavior != .doNothing {
-            try failOrRaise("Could not find slider with accessibility label '\(label)'.", file: file, line: line)
+            try failOrRaise("Could not find slider with accessibility label '\(identifier)'.", file: file, line: line)
         }
         return slider
     }
 
-    public func setSlider(accessibilityLabel label: String, value: Float, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard
-            let slider = try self.slider(accessibilityLabel: label, file: file, line: line),
-            slider.isEnabled
-        else { return }
-
-        slider.setValue(value, animated: false)
-        slider.sendActions(for: .valueChanged)
-    }
-
     // MARK: UITextField
 
-    public func textField(placeholder: String, file: StaticString = #filePath, line: UInt = #line) throws -> UITextField? {
+    public func textField(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) throws -> UITextField? {
         let textFields = controller.view.findViews(subclassOf: UITextField.self)
-        let textField = textFields.first(where: { $0.placeholder == placeholder && !$0.isHidden })
+        let textField = textFields.first(where: { $0.isIdentifiable(by: identifier, in: controller) })
 
         if textField == nil, failureBehavior != .doNothing {
-            try failOrRaise("Could not find text field with placeholder '\(placeholder)'.", file: file, line: line)
+            try failOrRaise("Could not find text field with placeholder '\(identifier)'.", file: file, line: line)
         }
         return textField
     }
@@ -188,6 +158,9 @@ public struct App {
         }
 
         return viewController
+
+    private func viewIsVisibleInController(_ view: UIView) -> Bool {
+        view.frame.intersects(controller.view.bounds)
     }
 
     private func failOrRaise(_ message: String, file: StaticString, line: UInt) throws {
