@@ -134,28 +134,28 @@ class Tests: XCTestCase {
         XCTAssertNil(try app.button("Dismiss view controller"))
 
         try app.tapButton(title: "Present view controller")
-        XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
+        XCTAssertNotNil(try app.button("Dismiss view controller"))
 
         try app.tapButton(title: "Dismiss view controller")
-        XCTAssertNil(try app.button(title: "Dismiss view controller"))
+        XCTAssertNil(try app.button("Dismiss view controller"))
     }
     
     func test_dismissNestedModalViewController() throws {
         let controller = RootViewController()
         let app = App(controller: controller, failureBehavior: .doNothing)
-        XCTAssertNil(try app.button(title: "Dismiss view controller"))
+        XCTAssertNil(try app.button("Dismiss view controller"))
 
         try app.tapButton(title: "Present view controller")
-        XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
+        XCTAssertNotNil(try app.button("Dismiss view controller"))
         
         try app.tapButton(title: "Present view controller")
-        XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
+        XCTAssertNotNil(try app.button("Dismiss view controller"))
 
         try app.tapButton(title: "Dismiss view controller")
-        XCTAssertNotNil(try app.button(title: "Dismiss view controller"))
+        XCTAssertNotNil(try app.button("Dismiss view controller"))
         
         try app.tapButton(title: "Dismiss view controller")
-        XCTAssertNil(try app.button(title: "Dismiss view controller"))
+        XCTAssertNil(try app.button("Dismiss view controller"))
     }
     
     // MARK: UITabBarController
@@ -163,10 +163,10 @@ class Tests: XCTestCase {
     func test_presentsAViewControllerOnSecondTabInTabBarController() throws {
         let tabBarController = TabBarViewController()
         let app = App(controller: tabBarController, failureBehavior: .doNothing)
-        XCTAssertNil(try app.button(title: "Present view controller from second tab"))
+        XCTAssertNil(try app.button("Present view controller from second tab"))
 
         tabBarController.selectedIndex = 1
-        XCTAssertNotNil(try app.button(title: "Present view controller from second tab"))
+        XCTAssertNotNil(try app.button("Present view controller from second tab"))
         try app.tapButton(title: "Present view controller from second tab")
         
         XCTAssertNotNil(tabBarController.secondTabViewController.presentedViewController)
@@ -179,8 +179,8 @@ class Tests: XCTestCase {
         let app = App(controller: controller)
 
         try app.tapButton(title: "Show alert")
-        XCTAssertNotNil(try app.label(text: "Alert title"))
-        XCTAssertNotNil(try app.label(text: "Alert message."))
+        XCTAssertNotNil(try app.label("Alert title"))
+        XCTAssertNotNil(try app.label("Alert message."))
     }
 
     func test_dismissesAnAlert() throws {
@@ -188,7 +188,7 @@ class Tests: XCTestCase {
         let app = App(controller: controller, failureBehavior: .doNothing)
 
         try app.tapButton(title: "Show alert")
-        XCTAssertNil(try app.button(title: "Show alert"))
+        XCTAssertNil(try app.button("Show alert"))
 
         app.alertViewController?.tapButton(title: "Dismiss")
         XCTAssertNotNil(try app.button("Show alert"))

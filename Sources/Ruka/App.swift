@@ -46,7 +46,7 @@ public struct App {
     }
 
     public func tapButton(title: String, file: StaticString = #filePath, line: UInt = #line) throws {
-        guard let button = try button(title: title), button.isEnabled else { return }
+        guard let button = try button(title), button.isEnabled else { return }
 
         let windowBeforeTap = window
         button.sendActions(for: .touchUpInside)
@@ -158,6 +158,7 @@ public struct App {
         }
 
         return viewController
+    }
 
     private func viewIsVisibleInController(_ view: UIView) -> Bool {
         view.frame.intersects(controller.view.bounds)

@@ -220,7 +220,6 @@
 				84146B112580386900A9768A /* App.swift */,
 				847AF23125897D8200D81C33 /* Identifiable.swift */,
 				84146B122580386900A9768A /* UIAlertController+ActionInvoker.swift */,
-				84146B0E2580386900A9768A /* UIButton.swift */,
 				847AF2502589852E00D81C33 /* UISlider.swift */,
 				847AF249258983BA00D81C33 /* UIStepper.swift */,
 				84146B142580386900A9768A /* UISwitch.swift */,
