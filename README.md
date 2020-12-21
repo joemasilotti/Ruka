@@ -48,9 +48,9 @@ Interaction with elements is ignored if the element is disabled.
 
 ### Button
 
- `let button = try app.button()` - find a button via `title` or accessibility label/identifier
+`try app.button(title:)` - find a non-hidden button with the given `title`, recursively, in the view
  
- `button?.tap()` - triggers the target-action for the button
+`app.tapButton(title:)` - triggers the target-action for the non-hidden button with the given `title`, if not disabled
 
 ### Switch
 

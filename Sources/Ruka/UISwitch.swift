@@ -2,8 +2,8 @@ import UIKit
 
 public extension UISwitch {
     func toggle() {
-        if isEnabled {
-            sendActions(for: .valueChanged)
-        }
+        guard isEnabled else { return }
+        
+        sendActions(for: .valueChanged)
     }
 }

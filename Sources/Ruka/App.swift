@@ -45,6 +45,17 @@ public struct App {
         return button
     }
 
+    public func tapButton(title: String, file: StaticString = #filePath, line: UInt = #line) throws {
+        guard let button = try button(title: title), button.isEnabled else { return }
+
+        let windowBeforeTap = window
+        button.sendActions(for: .touchUpInside)
+
+        // Controller containing button is being popped off of navigation stack, wait for animation.
+        let timeInterval: Animation.Length = windowBeforeTap != button.window ? .popController : .short
+        RunLoop.main.run(until: Date().addingTimeInterval(timeInterval.rawValue))
+    }
+
     // MARK: UITableView
 
     public var tableView: UITableView? {
@@ -124,15 +135,7 @@ public struct App {
 
     private let failureBehavior: FailureBehavior
     private let window = UIWindow()
-
-    private var controller: UIViewController! {
-        if let navigationController = window.rootViewController as? UINavigationController {
-            return navigationController.topViewController
-        } else if let presentedController = window.rootViewController?.presentedViewController {
-            return presentedController
-        }
-        return window.rootViewController
-    }
+    private var controller: UIViewController! { visibleViewController(from: window.rootViewController) }
 
     private func load(controller: UIViewController) {
         window.rootViewController = controller
@@ -140,6 +143,21 @@ public struct App {
         controller.loadViewIfNeeded()
         controller.view.layoutIfNeeded()
     }
+
+    private func visibleViewController(from viewController: UIViewController?) -> UIViewController? {
+        if let navigationController = viewController as? UINavigationController {
+            return visibleViewController(from: navigationController.topViewController)
+        }
+
+        if let tabBarController = viewController as? UITabBarController {
+            return visibleViewController(from: tabBarController.selectedViewController)
+        }
+
+        if let presentedViewController = viewController?.presentedViewController {
+            return visibleViewController(from: presentedViewController)
+        }
+
+        return viewController
 
     private func viewIsVisibleInController(_ view: UIView) -> Bool {
         view.frame.intersects(controller.view.bounds)
